@@ -1471,11 +1471,17 @@
 
       const g = id => document.getElementById(id)?.value?.trim() || "";
       const gv = id => document.getElementById(id)?.value || "";
+      const gd = id => {
+      const v = document.getElementById(id)?.value || "";
+      if (!v) return "";
+      const [y, m, d] = v.split("-");
+      return `${d}/${m}/${y}`;
+       };
 
       const payload = {
         // PASO 1
         siniestro_nro:      g("siniestro_nro"),
-        a_los_dias:         g("a_los_dias"),
+        a_los_dias:         gd("a_los_dias"),
         conductor:          g("conductor"),
         dni:                g("dni"),
         nacionalidad:       gv("nacionalidad"),
@@ -1499,10 +1505,10 @@
         chasis_nro:         g("chasis_nro"),
         color_vehiculo:     g("color_vehiculo"),
         // PASO 2
-        dia_siniestro:      g("dia_siniestro"),
+        dia_siniestro:      gd("dia_siniestro"),
         hora:               g("hora"),
         titular:            g("titular"),
-        vencimiento_licencia: g("vencimiento_licencia"),
+        vencimiento_licencia: gd("vencimiento_licencia"),
         velocidad:          g("velocidad"),
         calle:              g("calle"),
         localidad_hecho:    g("localidad_hecho"),
