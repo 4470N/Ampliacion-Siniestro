@@ -67,6 +67,7 @@
       align-items: center;
       max-width: 680px;
       width: 100%;
+      margin-top: 16px;
     }
     .step {
       display: flex;
@@ -76,12 +77,12 @@
       cursor: pointer;
     }
     .step-circle {
-      width: 30px; height: 30px;
+      width: 35px; height: 35px;
       border-radius: 50%;
       background: rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.45);
       font-weight: 700;
-      font-size: 12px;
+      font-size: 15px;
       display: flex; align-items: center; justify-content: center;
       border: 2px solid rgba(255,255,255,0.18);
       transition: all 0.3s;
@@ -89,7 +90,7 @@
     .step.active .step-circle  { background: var(--celeste); color: white; border-color: var(--celeste); }
     .step.done  .step-circle   { background: var(--verde); color: white; border-color: var(--verde); }
     .step-label {
-      font-size: 9px;
+      font-size: 11px;
       color: rgba(255,255,255,0.35);
       margin-top: 4px;
       text-align: center;
@@ -286,7 +287,7 @@
       background: #fafbfc;
       position: relative;
       width: 100%;
-      height: 170px;
+      height: 210px;
       margin-bottom: 12px;
     }
     canvas {
@@ -377,6 +378,16 @@
       .btn-row { flex-direction: column; }
       .step-label { display: none; }
     }
+
+    /* ── FOOTER ── */
+       .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+       .footer a { color: var(--celeste); text-decoration: none; }
+
   </style>
 </head>
 <body>
@@ -441,7 +452,7 @@
         <div class="row-2">
           <div class="field">
             <label>N° de Siniestro <span class="req">*</span></label>
-            <input type="text" id="siniestro_nro" placeholder="Ej: 00123456">
+            <input type="text" id="siniestro_nro" placeholder="Ej: 00123456" maxlength="7" data-filter="numbers">
           </div>
           <div class="field">
             <label>Fecha de declaración <span class="req">*</span></label>
@@ -450,16 +461,16 @@
         </div>
         <div class="field">
           <label>Nombre y Apellido del Conductor <span class="req">*</span></label>
-          <input type="text" id="conductor" placeholder="Apellido, Nombre">
+          <input type="text" id="conductor" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
             <label>DNI <span class="req">*</span></label>
-            <input type="text" id="dni" placeholder="Sin puntos">
+            <input type="text" id="dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
           </div>
           <div class="field">
             <label>Edad</label>
-            <input type="number" id="edad" placeholder="Años" min="16" max="99">
+            <input type="text" id="edad" placeholder="Años" maxlength="2" inputmode="numeric" data-filter="numbers">
           </div>
         </div>
         <div class="row-2">
@@ -490,30 +501,30 @@
         </div>
         <div class="field">
           <label>Profesión / Ocupación</label>
-          <input type="text" id="profesion" placeholder="Ej: Empleado, Comerciante, etc.">
+          <input type="text" id="profesion" placeholder="Ej: Empleado, Comerciante, etc." maxlength="20" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
             <label>Celular</label>
-            <input type="tel" id="celular" placeholder="11 XXXX-XXXX">
+            <input type="tel" id="celular" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
           </div>
           <div class="field">
             <label>Correo electrónico</label>
-            <input type="email" id="correo" placeholder="correo@ejemplo.com">
+            <input type="email" id="correo" placeholder="correo@ejemplo.com" maxlength="32">
           </div>
         </div>
         <div class="field">
           <label>Domicilio</label>
-          <input type="text" id="domicilio" placeholder="Calle y número">
+          <input type="text" id="domicilio" placeholder="Calle y número" maxlength="40">
         </div>
         <div class="row-2">
           <div class="field">
             <label>Localidad</label>
-            <input type="text" id="localidad" placeholder="Ciudad / Localidad">
+            <input type="text" id="localidad" placeholder="Ciudad / Localidad" maxlength="20" data-filter="letters">
           </div>
           <div class="field">
             <label>Vínculo con el asegurado</label>
-            <input type="text" id="vinculo" placeholder="Ej: Titular, Familiar, Empleado">
+            <input type="text" id="vinculo" placeholder="Ej: Titular, Familiar, Empleado" maxlength="10" data-filter="letters">
           </div>
         </div>
         <div class="field">
@@ -543,44 +554,44 @@
         <div class="row-3">
           <div class="field">
             <label>N° de Póliza</label>
-            <input type="text" id="poliza_nro" placeholder="Número">
+            <input type="text" id="poliza_nro" placeholder="Número" maxlength="10" data-filter="numbers">
           </div>
           <div class="field">
             <label>Riesgo Cubierto</label>
-            <input type="text" id="riesgo_cubierto" placeholder="Ej: R-C" value="R-C">
+            <input type="text" id="riesgo_cubierto" placeholder="Ej: R-C" value="R-C" maxlength="10">
           </div>
           <div class="field">
             <label>Patente / Dominio</label>
-            <input type="text" id="dominio" placeholder="ABC123" style="text-transform:uppercase">
+            <input type="text" id="dominio" placeholder="ABC123" style="text-transform:uppercase" maxlength="7">
           </div>
         </div>
         <div class="row-3">
           <div class="field">
             <label>Marca</label>
-            <input type="text" id="marca_unidad" placeholder="Ej: Toyota">
+            <input type="text" id="marca_unidad" placeholder="Ej: Toyota" maxlength="18" data-filter="letters">
           </div>
           <div class="field">
             <label>Modelo</label>
-            <input type="text" id="modelo_unidad" placeholder="Ej: Corolla">
+            <input type="text" id="modelo_unidad" placeholder="Ej: Corolla" maxlength="15">
           </div>
           <div class="field">
             <label>Año</label>
-            <input type="number" id="anio_unidad" placeholder="2020" min="1980" max="2030">
+            <input type="text" id="anio_unidad" placeholder="2020" maxlength="4" inputmode="numeric" data-filter="numbers">
           </div>
         </div>
         <div class="row-2">
           <div class="field">
             <label>N° de Motor</label>
-            <input type="text" id="motor_nro" placeholder="Número de motor">
+            <input type="text" id="motor_nro" placeholder="Número de motor" maxlength="20">
           </div>
           <div class="field">
             <label>N° de Chasis</label>
-            <input type="text" id="chasis_nro" placeholder="Número de chasis">
+            <input type="text" id="chasis_nro" placeholder="Número de chasis" maxlength="20">
           </div>
         </div>
         <div class="field">
           <label>Color del vehículo</label>
-          <input type="text" id="color_vehiculo" placeholder="Ej: Blanco, Gris, Rojo...">
+          <input type="text" id="color_vehiculo" placeholder="Ej: Blanco, Gris, Rojo..." maxlength="10" data-filter="letters">
         </div>
       </div>
     </div>
@@ -597,7 +608,7 @@
   <div class="section" id="sec-2">
 
     <div class="section-card">
-      <div class="section-title">🗓 Datos del Siniestro <span class="badge">PASO 2 / 6</span></div>
+      <div class="section-title">Datos del Siniestro <span class="badge">PASO 2 / 6</span></div>
       <div class="section-body">
         <div class="row-2">
           <div class="field">
@@ -606,45 +617,45 @@
           </div>
           <div class="field">
             <label>Hora aproximada</label>
-            <input type="text" id="hora" placeholder="Ej: 14:30 hs">
+            <input type="time" id="hora">
           </div>
         </div>
         <div class="field">
           <label>Titular del vehículo asegurado</label>
-          <input type="text" id="titular" placeholder="Nombre del titular de la póliza">
+          <input type="text" id="titular" placeholder="Nombre del titular de la póliza" maxlength="30" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
             <label>Vencimiento de licencia</label>
-            <input type="date" id="vencimiento_licencia">
+            <input type="date" id="vencimiento_licencia" min="1900-01-01" max="2099-12-31">
           </div>
           <div class="field">
             <label>Velocidad estimada (km/h)</label>
-            <input type="number" id="velocidad" placeholder="Ej: 40" min="0" max="300">
+            <input type="text" id="velocidad" placeholder="Ej: 40" maxlength="3" inputmode="numeric" data-filter="numbers">
           </div>
         </div>
         <div class="field">
           <label>Calle / Ruta donde ocurrió el hecho</label>
-          <input type="text" id="calle" placeholder="Nombre de la calle, ruta o autopista">
+          <input type="text" id="calle" placeholder="Nombre de la calle, ruta o autopista" maxlength="25" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
             <label>De la localidad de</label>
-            <input type="text" id="localidad_hecho" placeholder="Ciudad / Localidad del hecho">
+            <input type="text" id="localidad_hecho" placeholder="Ciudad / Localidad del hecho" maxlength="20" data-filter="letters">
           </div>
           <div class="field">
             <label>Intersección / Altura</label>
-            <input type="text" id="interseccion" placeholder="Ej: Av. San Martín al 500">
+            <input type="text" id="interseccion" placeholder="Ej: Av. San Martín al 500" maxlength="15" data-filter="letters">
           </div>
         </div>
         <div class="row-2">
           <div class="field">
             <label>Procedente de</label>
-            <input type="text" id="procedente" placeholder="Lugar de origen">
+            <input type="text" id="procedente" placeholder="Lugar de origen" maxlength="25" data-filter="letters">
           </div>
           <div class="field">
             <label>Con destino a</label>
-            <input type="text" id="destino" placeholder="Destino">
+            <input type="text" id="destino" placeholder="Destino" maxlength="25" data-filter="letters">
           </div>
         </div>
         <div class="row-2">
@@ -652,9 +663,8 @@
             <label>Mano de circulación</label>
             <select id="mano_circulacion">
               <option value="">Seleccionar</option>
-              <option>Mano derecha</option>
-              <option>Mano izquierda</option>
-              <option>Contramano</option>
+              <option>Mano unica</option>
+              <option>Doble mano</option>
             </select>
           </div>
           <div class="field">
@@ -665,16 +675,12 @@
               <option>Sur</option>
               <option>Este</option>
               <option>Oeste</option>
-              <option>Noreste</option>
-              <option>Noroeste</option>
-              <option>Sureste</option>
-              <option>Suroeste</option>
             </select>
           </div>
         </div>
         <div class="field">
           <label>Terceros involucrados</label>
-          <input type="text" id="terceros" placeholder="Indicar si hubo terceros, cantidad">
+          <input type="text" id="terceros" placeholder="Indicar si hubo terceros, cantidad" maxlength="50">
         </div>
         <div class="field">
           <label>Descripción del hecho <span class="req">*</span></label>
@@ -696,7 +702,7 @@
   <div class="section" id="sec-3">
 
     <div class="section-card">
-      <div class="section-title">🛣 Condiciones del Lugar <span class="badge">PASO 3 / 6</span></div>
+      <div class="section-title">Condiciones del Lugar <span class="badge">PASO 3 / 6</span></div>
       <div class="section-body">
         <div class="row-2">
           <div class="field">
@@ -750,7 +756,7 @@
         </div>
         <div class="field">
           <label>Otras características del lugar</label>
-          <input type="text" id="otras_caract" placeholder="Ej: cruce de vías, semáforo, señalización...">
+          <input type="text" id="otras_caract" placeholder="Ej: cruce de vías, semáforo, señalización..." maxlength="30" data-filter="letters">
         </div>
       </div>
     </div>
@@ -804,15 +810,15 @@
           <div class="divider"></div>
           <div class="field">
             <label>Nº de Factura / Nombre del taller</label>
-            <input type="text" id="taller_factura" placeholder="N° de factura o nombre del taller">
+            <input type="text" id="taller_factura" placeholder="N° de factura o nombre del taller" maxlength="40">
           </div>
           <div class="field">
             <label>Dirección del taller</label>
-            <input type="text" id="taller_direccion" placeholder="Calle, número, localidad">
+            <input type="text" id="taller_direccion" placeholder="Calle, número, localidad" maxlength="40">
           </div>
           <div class="field">
             <label>Teléfono del taller</label>
-            <input type="tel" id="taller_telefono" placeholder="Ej: 011 XXXX-XXXX">
+            <input type="tel" id="taller_telefono" placeholder="Ej: 011 XXXX-XXXX" maxlength="10" data-filter="numbers">
           </div>
         </div>
       </div>
@@ -831,12 +837,8 @@
   <div class="section" id="sec-4">
 
     <div class="section-card">
-      <div class="section-title">🚘 Estado del Vehículo Asegurado <span class="badge">PASO 4 / 6</span></div>
+      <div class="section-title"> Estado del Vehículo Asegurado <span class="badge">PASO 4 / 6</span></div>
       <div class="section-body">
-        <div class="info-box">
-          <strong>V – Comentarios del vehículo y su estado</strong><br>
-          Completá los datos que apliquen al vehículo asegurado.
-        </div>
         <div class="row-2">
           <div class="field">
             <label>Uso de la unidad</label>
@@ -852,7 +854,6 @@
             <select id="guarda_nocturna">
               <option value="En garaje">En garaje</option>
               <option value="En la vía pública">En la vía pública</option>
-              <option value="En cochera alquilada">En cochera alquilada</option>
               <option value="En predio cerrado">En predio cerrado</option>
             </select>
           </div>
@@ -927,38 +928,38 @@
         </div>
         <div class="field">
           <label>Accesorios especiales</label>
-          <input type="text" id="accesorios" placeholder="Ej: equipo de música, llantas especiales… o escribí 'No'">
+          <input type="text" id="accesorios" placeholder="Ej: equipo de música, llantas especiales… o escribí 'No'" maxlength="25">
         </div>
       </div>
     </div>
 
     <!-- Datos del Tercero -->
     <div class="section-card">
-      <div class="section-title">🔄 Datos del Tercero (VI)</div>
+      <div class="section-title"> Datos del Tercero</div>
       <div class="section-body">
         <div class="row-2">
           <div class="field">
             <label>Nombre y Apellido</label>
-            <input type="text" id="tercero_nombre" placeholder="Apellido, Nombre">
+            <input type="text" id="tercero_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
           </div>
           <div class="field">
             <label>DNI</label>
-            <input type="text" id="tercero_dni" placeholder="Sin puntos">
+            <input type="text" id="tercero_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
           </div>
         </div>
         <div class="row-2">
           <div class="field">
             <label>Teléfono</label>
-            <input type="tel" id="tercero_tel" placeholder="Número de contacto">
+            <input type="tel" id="tercero_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
           </div>
           <div class="field">
             <label>Vehículo</label>
-            <input type="text" id="tercero_vehiculo" placeholder="Marca, modelo, patente">
+            <input type="text" id="tercero_vehiculo" placeholder="Marca, modelo, patente" maxlength="25">
           </div>
         </div>
         <div class="field">
           <label>Domicilio</label>
-          <input type="text" id="tercero_domicilio" placeholder="Calle, número, localidad">
+          <input type="text" id="tercero_domicilio" placeholder="Calle, número, localidad" maxlength="40">
         </div>
       </div>
     </div>
@@ -977,24 +978,23 @@
 
     <!-- Testigos -->
     <div class="section-card">
-      <div class="section-title">👁 Testigos Presenciales <span class="badge">PASO 5 / 6</span></div>
+      <div class="section-title">Testigos Presenciales <span class="badge">PASO 5 / 6</span></div>
       <div class="section-body">
-        <div class="info-box">Indicá los datos de los testigos presenciales del hecho (hasta 2).</div>
 
         <div style="margin-bottom:16px">
           <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">TESTIGO 1</div>
           <div class="row-3">
             <div class="field">
               <label>Nombre y Apellido</label>
-              <input type="text" id="testigo1_nombre" placeholder="Apellido, Nombre">
+              <input type="text" id="testigo1_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
             </div>
             <div class="field">
               <label>DNI</label>
-              <input type="text" id="testigo1_dni" placeholder="Sin puntos">
+              <input type="text" id="testigo1_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
             </div>
             <div class="field">
               <label>Celular</label>
-              <input type="tel" id="testigo1_cel" placeholder="11 XXXX-XXXX">
+              <input type="tel" id="testigo1_cel" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
             </div>
           </div>
         </div>
@@ -1004,15 +1004,15 @@
           <div class="row-3">
             <div class="field">
               <label>Nombre y Apellido</label>
-              <input type="text" id="testigo2_nombre" placeholder="Apellido, Nombre">
+              <input type="text" id="testigo2_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
             </div>
             <div class="field">
               <label>DNI</label>
-              <input type="text" id="testigo2_dni" placeholder="Sin puntos">
+              <input type="text" id="testigo2_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
             </div>
             <div class="field">
               <label>Celular</label>
-              <input type="tel" id="testigo2_cel" placeholder="11 XXXX-XXXX">
+              <input type="tel" id="testigo2_cel" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
             </div>
           </div>
         </div>
@@ -1052,30 +1052,30 @@
           <div class="row-2">
             <div class="field">
               <label>Nombre y Apellido</label>
-              <input type="text" id="vic1_nombre" placeholder="Apellido, Nombre">
+              <input type="text" id="vic1_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
             </div>
             <div class="field">
               <label>DNI</label>
-              <input type="text" id="vic1_dni" placeholder="Sin puntos">
+              <input type="text" id="vic1_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
             </div>
           </div>
           <div class="row-2">
             <div class="field">
               <label>Teléfono</label>
-              <input type="tel" id="vic1_tel" placeholder="Número de contacto">
+              <input type="tel" id="vic1_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
             </div>
             <div class="field">
               <label>Rodado / Vehículo</label>
-              <input type="text" id="vic1_rodado" placeholder="Ej: Moto, Auto, Bicicleta">
+              <input type="text" id="vic1_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20">
             </div>
           </div>
           <div class="field">
             <label>Dirección</label>
-            <input type="text" id="vic1_direccion" placeholder="Domicilio de la víctima">
+            <input type="text" id="vic1_direccion" placeholder="Domicilio de la víctima" maxlength="40">
           </div>
           <div class="field">
             <label>Lesiones</label>
-            <input type="text" id="vic1_lesiones" placeholder="Descripción de lesiones">
+            <input type="text" id="vic1_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters">
           </div>
           <div class="row-3">
             <div class="field">
@@ -1090,7 +1090,7 @@
             </div>
             <div class="field">
               <label>Ocupación</label>
-              <input type="text" id="vic1_ocupacion" placeholder="Ocupación">
+              <input type="text" id="vic1_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters">
             </div>
             <div class="field">
               <label>¿ART del 3°?</label>
@@ -1107,18 +1107,18 @@
         <!-- Víctima 2 -->
         <div class="victim-panel" id="victim-2">
           <div class="row-2">
-            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic2_nombre" placeholder="Apellido, Nombre"></div>
-            <div class="field"><label>DNI</label><input type="text" id="vic2_dni" placeholder="Sin puntos"></div>
+            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic2_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters"></div>
+            <div class="field"><label>DNI</label><input type="text" id="vic2_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers"></div>
           </div>
           <div class="row-2">
-            <div class="field"><label>Teléfono</label><input type="tel" id="vic2_tel" placeholder="Número de contacto"></div>
-            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic2_rodado" placeholder="Ej: Moto, Auto, Bicicleta"></div>
+            <div class="field"><label>Teléfono</label><input type="tel" id="vic2_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers"></div>
+            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic2_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20"></div>
           </div>
-          <div class="field"><label>Dirección</label><input type="text" id="vic2_direccion" placeholder="Domicilio de la víctima"></div>
-          <div class="field"><label>Lesiones</label><input type="text" id="vic2_lesiones" placeholder="Descripción de lesiones"></div>
+          <div class="field"><label>Dirección</label><input type="text" id="vic2_direccion" placeholder="Domicilio de la víctima" maxlength="40"></div>
+          <div class="field"><label>Lesiones</label><input type="text" id="vic2_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters"></div>
           <div class="row-3">
             <div class="field"><label>Cond. / 3° T.</label><select id="vic2_cond"><option value="">Selec.</option><option>Conductor</option><option>3° Titular</option><option>Acompañante</option><option>Peatón</option></select></div>
-            <div class="field"><label>Ocupación</label><input type="text" id="vic2_ocupacion" placeholder="Ocupación"></div>
+            <div class="field"><label>Ocupación</label><input type="text" id="vic2_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters"></div>
             <div class="field"><label>¿ART del 3°?</label><select id="vic2_art"><option value="">Selec.</option><option>No</option><option>Sí</option><option>No sabe</option></select></div>
           </div>
         </div>
@@ -1126,18 +1126,18 @@
         <!-- Víctima 3 -->
         <div class="victim-panel" id="victim-3">
           <div class="row-2">
-            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic3_nombre" placeholder="Apellido, Nombre"></div>
-            <div class="field"><label>DNI</label><input type="text" id="vic3_dni" placeholder="Sin puntos"></div>
+            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic3_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters"></div>
+            <div class="field"><label>DNI</label><input type="text" id="vic3_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers"></div>
           </div>
           <div class="row-2">
-            <div class="field"><label>Teléfono</label><input type="tel" id="vic3_tel" placeholder="Número de contacto"></div>
-            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic3_rodado" placeholder="Ej: Moto, Auto, Bicicleta"></div>
+            <div class="field"><label>Teléfono</label><input type="tel" id="vic3_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers"></div>
+            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic3_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20"></div>
           </div>
-          <div class="field"><label>Dirección</label><input type="text" id="vic3_direccion" placeholder="Domicilio de la víctima"></div>
-          <div class="field"><label>Lesiones</label><input type="text" id="vic3_lesiones" placeholder="Descripción de lesiones"></div>
+          <div class="field"><label>Dirección</label><input type="text" id="vic3_direccion" placeholder="Domicilio de la víctima" maxlength="40"></div>
+          <div class="field"><label>Lesiones</label><input type="text" id="vic3_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters"></div>
           <div class="row-3">
             <div class="field"><label>Cond. / 3° T.</label><select id="vic3_cond"><option value="">Selec.</option><option>Conductor</option><option>3° Titular</option><option>Acompañante</option><option>Peatón</option></select></div>
-            <div class="field"><label>Ocupación</label><input type="text" id="vic3_ocupacion" placeholder="Ocupación"></div>
+            <div class="field"><label>Ocupación</label><input type="text" id="vic3_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters"></div>
             <div class="field"><label>¿ART del 3°?</label><select id="vic3_art"><option value="">Selec.</option><option>No</option><option>Sí</option><option>No sabe</option></select></div>
           </div>
         </div>
@@ -1145,18 +1145,18 @@
         <!-- Víctima 4 -->
         <div class="victim-panel" id="victim-4">
           <div class="row-2">
-            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic4_nombre" placeholder="Apellido, Nombre"></div>
-            <div class="field"><label>DNI</label><input type="text" id="vic4_dni" placeholder="Sin puntos"></div>
+            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic4_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters"></div>
+            <div class="field"><label>DNI</label><input type="text" id="vic4_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers"></div>
           </div>
           <div class="row-2">
-            <div class="field"><label>Teléfono</label><input type="tel" id="vic4_tel" placeholder="Número de contacto"></div>
-            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic4_rodado" placeholder="Ej: Moto, Auto, Bicicleta"></div>
+            <div class="field"><label>Teléfono</label><input type="tel" id="vic4_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers"></div>
+            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic4_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20"></div>
           </div>
-          <div class="field"><label>Dirección</label><input type="text" id="vic4_direccion" placeholder="Domicilio de la víctima"></div>
-          <div class="field"><label>Lesiones</label><input type="text" id="vic4_lesiones" placeholder="Descripción de lesiones"></div>
+          <div class="field"><label>Dirección</label><input type="text" id="vic4_direccion" placeholder="Domicilio de la víctima" maxlength="40"></div>
+          <div class="field"><label>Lesiones</label><input type="text" id="vic4_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters"></div>
           <div class="row-3">
             <div class="field"><label>Cond. / 3° T.</label><select id="vic4_cond"><option value="">Selec.</option><option>Conductor</option><option>3° Titular</option><option>Acompañante</option><option>Peatón</option></select></div>
-            <div class="field"><label>Ocupación</label><input type="text" id="vic4_ocupacion" placeholder="Ocupación"></div>
+            <div class="field"><label>Ocupación</label><input type="text" id="vic4_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters"></div>
             <div class="field"><label>¿ART del 3°?</label><select id="vic4_art"><option value="">Selec.</option><option>No</option><option>Sí</option><option>No sabe</option></select></div>
           </div>
         </div>
@@ -1178,9 +1178,9 @@
 
     <!-- Archivos -->
     <div class="section-card">
-      <div class="section-title">📎 Documentación <span class="badge">PASO 6 / 6</span></div>
+      <div class="section-title">Documentación <span class="badge">PASO 6 / 6</span></div>
       <div class="section-body">
-        <div class="info-box">Adjuntá fotos nítidas de cada documento. Formatos aceptados: JPG, PNG, PDF.</div>
+        <div class="info-box">Adjuntá fotos nítidas de cada documento. Formatos aceptados: JPG, PNG.</div>
         <div class="file-grid">
           <div class="file-item">
             <label>DNI – Frente</label>
@@ -1241,11 +1241,11 @@
         <div class="row-2">
           <div class="field">
             <label>DNI del declarante <span class="req">*</span></label>
-            <input type="text" id="dni_declarante" placeholder="Sin puntos">
+            <input type="text" id="dni_declarante" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
           </div>
           <div class="field">
             <label>Aclaración (Nombre) <span class="req">*</span></label>
-            <input type="text" id="aclaracion" placeholder="Nombre completo en imprenta">
+            <input type="text" id="aclaracion" placeholder="Nombre completo en imprenta" maxlength="30" data-filter="letters">
           </div>
         </div>
         <div class="field" style="margin-top:4px">
@@ -1292,6 +1292,38 @@
 
 <script>
   const WEBHOOK_URL = "https://class-laura-works-trail.trycloudflare.com/webhook/declaracion-siniestro";
+
+ // ── Filtros de caracteres y fechas ──
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.addEventListener("input", function(e) {
+    const filter = e.target.getAttribute("data-filter");
+    if (!filter) return;
+    const pos = e.target.selectionStart;
+    let val = e.target.value;
+    if (filter === "numbers") {
+      e.target.value = val.replace(/[^0-9]/g, "");
+    } else if (filter === "letters") {
+      e.target.value = val.replace(/[^a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]/g, "");
+    }
+    e.target.setSelectionRange(pos, pos);
+  });
+
+  ["a_los_dias", "dia_siniestro", "vencimiento_licencia"].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener("input", function() {
+      const val = this.value;
+      if (!val) return;
+      const parts = val.split("-");
+      if (parts[0] && parts[0].length > 4) {
+        parts[0] = parts[0].slice(0, 4);
+        this.value = parts.join("-");
+      }
+    });
+  });
+
+});
 
   let currentStep = 1;
   const totalSteps = 6;
@@ -1471,17 +1503,11 @@
 
       const g = id => document.getElementById(id)?.value?.trim() || "";
       const gv = id => document.getElementById(id)?.value || "";
-      const gd = id => {
-      const v = document.getElementById(id)?.value || "";
-      if (!v) return "";
-      const [y, m, d] = v.split("-");
-      return `${d}/${m}/${y}`;
-       };
 
       const payload = {
         // PASO 1
         siniestro_nro:      g("siniestro_nro"),
-        a_los_dias:         gd("a_los_dias"),
+        a_los_dias:         g("a_los_dias"),
         conductor:          g("conductor"),
         dni:                g("dni"),
         nacionalidad:       gv("nacionalidad"),
@@ -1505,10 +1531,10 @@
         chasis_nro:         g("chasis_nro"),
         color_vehiculo:     g("color_vehiculo"),
         // PASO 2
-        dia_siniestro:      gd("dia_siniestro"),
+        dia_siniestro:      g("dia_siniestro"),
         hora:               g("hora"),
         titular:            g("titular"),
-        vencimiento_licencia: gd("vencimiento_licencia"),
+        vencimiento_licencia: g("vencimiento_licencia"),
         velocidad:          g("velocidad"),
         calle:              g("calle"),
         localidad_hecho:    g("localidad_hecho"),
@@ -1611,5 +1637,15 @@
     document.getElementById("screenError").style.display = "none";
   }
 </script>
+</script>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Iezzi & Varone</strong> — Abogados Penalistas de Empresas<br>
+  <a href="https://www.iezzivarone.com" target="_blank">www.iezzivarone.com</a> · Asistencia Garantizada las 24 hs.
+</div>
+
+</body>
+</html>
 </body>
 </html>
