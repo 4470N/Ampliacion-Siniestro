@@ -380,13 +380,31 @@
     }
 
     /* ── FOOTER ── */
-       .footer {
-        text-align: center;
-        padding: 20px;
-        font-size: 11px;
-        color: var(--muted);
-      }
-       .footer a { color: var(--celeste); text-decoration: none; }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .footer a { color: var(--celeste); text-decoration: none; }
+
+    /* ── CAMPOS INVÁLIDOS ── */
+    .field-error input,
+    .field-error select,
+    .field-error textarea {
+      border-color: var(--rojo) !important;
+      background: #fff5f5 !important;
+      box-shadow: 0 0 0 3px rgba(230,51,41,0.12);
+    }
+    .field-error-msg {
+      color: var(--rojo);
+      font-size: 11px;
+      margin-top: 4px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
   </style>
 </head>
@@ -400,7 +418,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <h1> Denuncia de Siniestro</h1>
+  <h1>Denuncia de Siniestro</h1>
   <p>Completá el formulario paso a paso. Tus datos están seguros y protegidos.</p>
 </div>
 
@@ -837,7 +855,7 @@
   <div class="section" id="sec-4">
 
     <div class="section-card">
-      <div class="section-title"> Estado del Vehículo Asegurado <span class="badge">PASO 4 / 6</span></div>
+      <div class="section-title">Estado del Vehículo Asegurado <span class="badge">PASO 4 / 6</span></div>
       <div class="section-body">
         <div class="row-2">
           <div class="field">
@@ -1294,7 +1312,7 @@
   const WEBHOOK_URL = "https://class-laura-works-trail.trycloudflare.com/webhook/declaracion-siniestro";
 
  // ── Filtros de caracteres y fechas ──
-document.addEventListener("DOMContentLoaded", function() {
+ document.addEventListener("DOMContentLoaded", function() {
 
   document.addEventListener("input", function(e) {
     const filter = e.target.getAttribute("data-filter");
@@ -1324,6 +1342,27 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 });
+
+// Limpiar error visual al corregir un campo
+  document.addEventListener("input", function(e) {
+    const field = e.target.closest(".field");
+    if (!field || !field.classList.contains("field-error")) return;
+    if (e.target.value.trim()) {
+      field.classList.remove("field-error");
+      const msg = field.querySelector(".field-error-msg");
+      if (msg) msg.remove();
+    }
+  });
+
+  document.addEventListener("change", function(e) {
+    const field = e.target.closest(".field");
+    if (!field || !field.classList.contains("field-error")) return;
+    if (e.target.value.trim()) {
+      field.classList.remove("field-error");
+      const msg = field.querySelector(".field-error-msg");
+      if (msg) msg.remove();
+    }
+  });
 
   let currentStep = 1;
   const totalSteps = 6;
@@ -1358,6 +1397,24 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // ── Validaciones ──
+function clearErrors(step) {
+    const section = document.getElementById(`sec-${step}`);
+    section.querySelectorAll(".field-error").forEach(f => f.classList.remove("field-error"));
+    section.querySelectorAll(".field-error-msg").forEach(m => m.remove());
+  }
+
+  function markError(el) {
+    const field = el.closest(".field");
+    if (!field) return;
+    field.classList.add("field-error");
+    if (!field.querySelector(".field-error-msg")) {
+      const msg = document.createElement("div");
+      msg.className = "field-error-msg";
+      msg.innerHTML = "⚠ Este campo es obligatorio";
+      field.appendChild(msg);
+    }
+  }
+
   function validateStep(step) {
     const required = {
       1: ["siniestro_nro","a_los_dias","conductor","dni","aseguradora"],
@@ -1365,16 +1422,31 @@ document.addEventListener("DOMContentLoaded", function() {
       3: [], 4: [], 5: [],
       6: ["dni_declarante","aclaracion"]
     };
+
+    clearErrors(step);
+
+    let firstInvalid = null;
+    let hasErrors = false;
+
     for (const id of (required[step] || [])) {
       const el = document.getElementById(id);
       if (!el || !el.value.trim()) {
-        el?.focus();
-        el?.scrollIntoView({ behavior:"smooth", block:"center" });
-        if (el?.style) el.style.borderColor = "#e63329";
-        setTimeout(() => { if (el) el.style.borderColor = ""; }, 2000);
-        alert("Por favor completá el campo requerido.");
-        return false;
+        markError(el);
+        if (!firstInvalid) firstInvalid = el;
+        hasErrors = true;
+      } else {
+        const field = el.closest(".field");
+        if (field) {
+          field.classList.remove("field-error");
+          const msg = field.querySelector(".field-error-msg");
+          if (msg) msg.remove();
+        }
       }
+    }
+
+    if (hasErrors) {
+      firstInvalid?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return false;
     }
     return true;
   }
@@ -1637,7 +1709,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("screenError").style.display = "none";
   }
 </script>
-</script>
 
 <!-- FOOTER -->
 <div class="footer">
@@ -1645,7 +1716,5 @@ document.addEventListener("DOMContentLoaded", function() {
   <a href="https://www.iezzivarone.com" target="_blank">www.iezzivarone.com</a> · Asistencia Garantizada las 24 hs.
 </div>
 
-</body>
-</html>
 </body>
 </html>
