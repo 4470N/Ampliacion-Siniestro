@@ -693,6 +693,24 @@
           <label>Color del vehículo</label>
           <input type="text" id="color_vehiculo" placeholder="Ej: Blanco, Gris, Rojo..." maxlength="10" data-filter="letters">
         </div>
+        <div class="field">
+          <label>Titular del vehículo asegurado</label>
+          <input type="text" id="titular" placeholder="Nombre del titular de la póliza" maxlength="30" data-filter="letters">
+        </div>
+        <div class="row-3">
+          <div class="field">
+            <label>DNI del titular</label>
+            <input type="text" id="titular_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+          </div>
+          <div class="field">
+            <label>Domicilio del titular</label>
+            <input type="text" id="titular_domicilio" placeholder="Calle y número" maxlength="40">
+          </div>
+          <div class="field">
+            <label>Teléfono del titular</label>
+            <input type="tel" id="titular_telefono" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -719,10 +737,6 @@
             <label>Hora aproximada</label>
             <input type="time" id="hora">
           </div>
-        </div>
-        <div class="field">
-          <label>Titular del vehículo asegurado</label>
-          <input type="text" id="titular" placeholder="Nombre del titular de la póliza" maxlength="30" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
