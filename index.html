@@ -211,9 +211,9 @@
     .toggle-btn.active-no  { background: #fff5f5; border-color: #e0b0b0; color: #c0392b; }
 
     /* ── CONDITIONAL FIELDS ── */
-    .conditional { overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s; }
+    .conditional { overflow: hidden; transition: max-height 0.45s ease, opacity 0.3s; }
     .conditional.hidden { max-height: 0; opacity: 0; pointer-events: none; }
-    .conditional.visible { max-height: 800px; opacity: 1; }
+    .conditional.visible { max-height: 2400px; opacity: 1; }
 
     /* ── VICTIM CARDS ── */
     .victim-tabs {
@@ -891,6 +891,32 @@
             <option>No</option>
           </select>
         </div>
+        <div class="row-2">
+          <div class="field">
+            <label>Intervención Policial</label>
+            <select id="intervencion_policial">
+              <option value="">Seleccionar</option>
+              <option>Si</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Intervención Hospitalaria</label>
+            <select id="intervencion_hospitalaria">
+              <option value="">Seleccionar</option>
+              <option>Si</option>
+              <option>No</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Causa Penal</label>
+          <select id="causa_penal">
+            <option value="">Seleccionar</option>
+            <option>Si</option>
+            <option>No</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -1033,33 +1059,120 @@
       </div>
     </div>
 
-    <!-- Datos del Tercero -->
+    <!-- Terceros Transportados -->
     <div class="section-card">
-      <div class="section-title"> Datos del Tercero</div>
+      <div class="section-title">🚗 Terceros Transportados</div>
       <div class="section-body">
-        <div class="row-2">
-          <div class="field">
-            <label>Nombre y Apellido</label>
-            <input type="text" id="tercero_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
-          </div>
-          <div class="field">
-            <label>DNI</label>
-            <input type="text" id="tercero_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
-          </div>
-        </div>
-        <div class="row-2">
-          <div class="field">
-            <label>Teléfono</label>
-            <input type="tel" id="tercero_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
-          </div>
-          <div class="field">
-            <label>Vehículo</label>
-            <input type="text" id="tercero_vehiculo" placeholder="Marca, modelo, patente" maxlength="25">
-          </div>
-        </div>
         <div class="field">
-          <label>Domicilio</label>
-          <input type="text" id="tercero_domicilio" placeholder="Calle, número, localidad" maxlength="40">
+          <label>¿Hubo terceros transportados?</label>
+          <div class="toggle-group">
+            <button type="button" class="toggle-btn" id="tert_si" onclick="toggleTerceroT('si')">✔ Sí</button>
+            <button type="button" class="toggle-btn" id="tert_no" onclick="toggleTerceroT('no')">✖ No</button>
+          </div>
+          <input type="hidden" id="hubo_tercero_transportado" value="">
+        </div>
+        <div class="conditional hidden" id="cond_tercero_t">
+          <div class="divider"></div>
+          <div class="row-2">
+            <div class="field">
+              <label>Nombre y Apellido</label>
+              <input type="text" id="tercero_t_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
+            </div>
+            <div class="field">
+              <label>DNI</label>
+              <input type="text" id="tercero_t_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label>Teléfono</label>
+              <input type="tel" id="tercero_t_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
+            </div>
+            <div class="field">
+              <label>Domicilio</label>
+              <input type="text" id="tercero_t_domicilio" placeholder="Calle, número, localidad" maxlength="40">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terceros No Transportados -->
+    <div class="section-card">
+      <div class="section-title">🚙 Terceros No Transportados</div>
+      <div class="section-body">
+        <div class="field">
+          <label>¿Hubo terceros no transportados?</label>
+          <div class="toggle-group">
+            <button type="button" class="toggle-btn" id="ternt_si" onclick="toggleTerceroNT('si')">✔ Sí</button>
+            <button type="button" class="toggle-btn" id="ternt_no" onclick="toggleTerceroNT('no')">✖ No</button>
+          </div>
+          <input type="hidden" id="hubo_tercero_no_transportado" value="">
+        </div>
+        <div class="conditional hidden" id="cond_tercero_nt">
+          <div class="divider"></div>
+          <div class="row-2">
+            <div class="field">
+              <label>Nombre y Apellido</label>
+              <input type="text" id="tercero_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
+            </div>
+            <div class="field">
+              <label>DNI</label>
+              <input type="text" id="tercero_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label>Teléfono</label>
+              <input type="tel" id="tercero_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
+            </div>
+            <div class="field">
+              <label>Domicilio</label>
+              <input type="text" id="tercero_domicilio" placeholder="Calle, número, localidad" maxlength="40">
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">Vehículo del Tercero</div>
+          <div class="row-3">
+            <div class="field">
+              <label>Marca</label>
+              <input type="text" id="tercero_vehiculo_marca" placeholder="Ej: Toyota" maxlength="20">
+            </div>
+            <div class="field">
+              <label>Modelo</label>
+              <input type="text" id="tercero_vehiculo_modelo" placeholder="Ej: Corolla" maxlength="20">
+            </div>
+            <div class="field">
+              <label>Año</label>
+              <input type="text" id="tercero_vehiculo_anio" placeholder="Ej: 2022" maxlength="4" inputmode="numeric">
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label>Dominio / Patente</label>
+              <input type="text" id="tercero_vehiculo_dominio" placeholder="Ej: ABC-123" maxlength="10">
+            </div>
+            <div class="field">
+              <label>Uso</label>
+              <select id="tercero_vehiculo_uso">
+                <option value="">Seleccionar</option>
+                <option>Particular</option>
+                <option>Comercial</option>
+                <option>Transporte de pasajeros</option>
+                <option>Carga</option>
+              </select>
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label>N° de Motor</label>
+              <input type="text" id="tercero_vehiculo_motor" placeholder="Número de motor" maxlength="30">
+            </div>
+            <div class="field">
+              <label>N° de Chasis</label>
+              <input type="text" id="tercero_vehiculo_chasis" placeholder="Número de chasis" maxlength="30">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1097,10 +1210,14 @@
               <input type="tel" id="testigo1_cel" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
             </div>
           </div>
+          <div class="field">
+            <label>Descripción / observaciones</label>
+            <textarea id="testigo1_descripcion" placeholder="Descripción adicional sobre el testigo o lo que presenció" maxlength="200" style="min-height:60px;"></textarea>
+          </div>
         </div>
 
-        <div>
-          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">TESTIGO 2</div>
+        <div style="margin-bottom:16px">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">TESTIGO 2 <span style="font-weight:400;color:var(--muted);">(opcional)</span></div>
           <div class="row-3">
             <div class="field">
               <label>Nombre y Apellido</label>
@@ -1114,6 +1231,32 @@
               <label>Celular</label>
               <input type="tel" id="testigo2_cel" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
             </div>
+          </div>
+          <div class="field">
+            <label>Descripción / observaciones</label>
+            <textarea id="testigo2_descripcion" placeholder="Descripción adicional" maxlength="200" style="min-height:60px;"></textarea>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">TESTIGO 3 <span style="font-weight:400;color:var(--muted);">(opcional)</span></div>
+          <div class="row-3">
+            <div class="field">
+              <label>Nombre y Apellido</label>
+              <input type="text" id="testigo3_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
+            </div>
+            <div class="field">
+              <label>DNI</label>
+              <input type="text" id="testigo3_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+            </div>
+            <div class="field">
+              <label>Celular</label>
+              <input type="tel" id="testigo3_cel" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
+            </div>
+          </div>
+          <div class="field">
+            <label>Descripción / observaciones</label>
+            <textarea id="testigo3_descripcion" placeholder="Descripción adicional" maxlength="200" style="min-height:60px;"></textarea>
           </div>
         </div>
       </div>
@@ -1553,6 +1696,28 @@ function clearErrors(step) {
     no.className = "toggle-btn" + (val === "no" ? " active-no" : "");
   }
 
+  // ── Toggle Si/No: Tercero Transportado ──
+  function toggleTerceroT(val) {
+    document.getElementById("hubo_tercero_transportado").value = val;
+    const si = document.getElementById("tert_si");
+    const no = document.getElementById("tert_no");
+    si.className = "toggle-btn" + (val === "si" ? " active-si" : "");
+    no.className = "toggle-btn" + (val === "no" ? " active-no" : "");
+    const cond = document.getElementById("cond_tercero_t");
+    cond.className = "conditional " + (val === "si" ? "visible" : "hidden");
+  }
+
+  // ── Toggle Si/No: Tercero No Transportado ──
+  function toggleTerceroNT(val) {
+    document.getElementById("hubo_tercero_no_transportado").value = val;
+    const si = document.getElementById("ternt_si");
+    const no = document.getElementById("ternt_no");
+    si.className = "toggle-btn" + (val === "si" ? " active-si" : "");
+    no.className = "toggle-btn" + (val === "no" ? " active-no" : "");
+    const cond = document.getElementById("cond_tercero_nt");
+    cond.className = "conditional " + (val === "si" ? "visible" : "hidden");
+  }
+
   // ── Victim tabs ──
   function showVictim(n) {
     document.querySelectorAll(".victim-tab").forEach((t, i) => {
@@ -1717,9 +1882,12 @@ function clearErrors(step) {
         iluminacion:        gv("iluminacion"),
         visibilidad:        gv("visibilidad"),
         otras_caract:       g("otras_caract"),
-        actuaciones_penales:gv("actuaciones_penales"),
-        alcoholemia:        gv("alcoholemia"),
-        ingirio:            gv("ingirio"),
+        actuaciones_penales:    gv("actuaciones_penales"),
+        alcoholemia:            gv("alcoholemia"),
+        ingirio:                gv("ingirio"),
+        intervencion_policial:  gv("intervencion_policial"),
+        intervencion_hospitalaria: gv("intervencion_hospitalaria"),
+        causa_penal:            gv("causa_penal"),
         vehiculo_reparado:  g("vehiculo_reparado"),
         taller_factura:     g("taller_factura"),
         taller_direccion:   g("taller_direccion"),
@@ -1736,19 +1904,38 @@ function clearErrors(step) {
         estado_mecanica:    gv("estado_mecanica"),
         cubiertas:          gv("cubiertas"),
         accesorios:         g("accesorios"),
-        // Tercero
-        tercero_nombre:     g("tercero_nombre"),
-        tercero_dni:        g("tercero_dni"),
-        tercero_tel:        g("tercero_tel"),
-        tercero_vehiculo:   g("tercero_vehiculo"),
-        tercero_domicilio:  g("tercero_domicilio"),
+        // Terceros transportados
+        hubo_tercero_transportado:    g("hubo_tercero_transportado"),
+        tercero_t_nombre:             g("tercero_t_nombre"),
+        tercero_t_dni:                g("tercero_t_dni"),
+        tercero_t_tel:                g("tercero_t_tel"),
+        tercero_t_domicilio:          g("tercero_t_domicilio"),
+        // Terceros no transportados
+        hubo_tercero_no_transportado: g("hubo_tercero_no_transportado"),
+        tercero_nombre:               g("tercero_nombre"),
+        tercero_dni:                  g("tercero_dni"),
+        tercero_tel:                  g("tercero_tel"),
+        tercero_domicilio:            g("tercero_domicilio"),
+        tercero_vehiculo_marca:       g("tercero_vehiculo_marca"),
+        tercero_vehiculo_modelo:      g("tercero_vehiculo_modelo"),
+        tercero_vehiculo_anio:        g("tercero_vehiculo_anio"),
+        tercero_vehiculo_dominio:     g("tercero_vehiculo_dominio"),
+        tercero_vehiculo_uso:         gv("tercero_vehiculo_uso"),
+        tercero_vehiculo_motor:       g("tercero_vehiculo_motor"),
+        tercero_vehiculo_chasis:      g("tercero_vehiculo_chasis"),
         // PASO 5 – Testigos
-        testigo1_nombre:    g("testigo1_nombre"),
-        testigo1_dni:       g("testigo1_dni"),
-        testigo1_cel:       g("testigo1_cel"),
-        testigo2_nombre:    g("testigo2_nombre"),
-        testigo2_dni:       g("testigo2_dni"),
-        testigo2_cel:       g("testigo2_cel"),
+        testigo1_nombre:              g("testigo1_nombre"),
+        testigo1_dni:                 g("testigo1_dni"),
+        testigo1_cel:                 g("testigo1_cel"),
+        testigo1_descripcion:         g("testigo1_descripcion"),
+        testigo2_nombre:              g("testigo2_nombre"),
+        testigo2_dni:                 g("testigo2_dni"),
+        testigo2_cel:                 g("testigo2_cel"),
+        testigo2_descripcion:         g("testigo2_descripcion"),
+        testigo3_nombre:              g("testigo3_nombre"),
+        testigo3_dni:                 g("testigo3_dni"),
+        testigo3_cel:                 g("testigo3_cel"),
+        testigo3_descripcion:         g("testigo3_descripcion"),
         personal_medico:    g("personal_medico"),
         // Víctimas
         vic1_nombre:        g("vic1_nombre"), vic1_dni: g("vic1_dni"), vic1_tel: g("vic1_tel"),
