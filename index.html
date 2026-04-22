@@ -1488,6 +1488,46 @@
             </div>
           </div>
         </div>
+        <div class="divider"></div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">📸 Fotos del Vehículo del Asegurado</div>
+        <div class="file-grid">
+          <div class="file-item">
+            <label>Foto del vehículo asegurado 1</label>
+            <div class="file-drop" id="drop-foto-asegurado-1">
+              <span class="icon">🚗</span>
+              <div class="file-label">Tocá para subir</div>
+              <input type="file" id="foto_asegurado_1" accept="image/*" onchange="handleFile(this,'drop-foto-asegurado-1')">
+            </div>
+          </div>
+          <div class="file-item">
+            <label>Foto del vehículo asegurado 2</label>
+            <div class="file-drop" id="drop-foto-asegurado-2">
+              <span class="icon">🚗</span>
+              <div class="file-label">Tocá para subir</div>
+              <input type="file" id="foto_asegurado_2" accept="image/*" onchange="handleFile(this,'drop-foto-asegurado-2')">
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">📸 Fotos del Vehículo del Tercero</div>
+        <div class="file-grid">
+          <div class="file-item">
+            <label>Foto del vehículo del tercero 1</label>
+            <div class="file-drop" id="drop-foto-tercero-1">
+              <span class="icon">🚙</span>
+              <div class="file-label">Tocá para subir</div>
+              <input type="file" id="foto_tercero_1" accept="image/*" onchange="handleFile(this,'drop-foto-tercero-1')">
+            </div>
+          </div>
+          <div class="file-item">
+            <label>Foto del vehículo del tercero 2</label>
+            <div class="file-drop" id="drop-foto-tercero-2">
+              <span class="icon">🚙</span>
+              <div class="file-label">Tocá para subir</div>
+              <input type="file" id="foto_tercero_2" accept="image/*" onchange="handleFile(this,'drop-foto-tercero-2')">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1835,7 +1875,8 @@ function clearErrors(step) {
     btn.textContent = "⏳ Enviando declaración...";
 
     try {
-      const [dniFrenteB64, dniDorsoB64, cedulaFrenteB64, cedulaDorsoB64, licFrenteB64, licDorsoB64] =
+      const [dniFrenteB64, dniDorsoB64, cedulaFrenteB64, cedulaDorsoB64, licFrenteB64, licDorsoB64,
+             fotoAsegurado1B64, fotoAsegurado2B64, fotoTercero1B64, fotoTercero2B64] =
         await Promise.all([
           fileToBase64(document.getElementById("dni_frente").files[0]),
           fileToBase64(document.getElementById("dni_dorso").files[0]),
@@ -1843,6 +1884,10 @@ function clearErrors(step) {
           fileToBase64(document.getElementById("cedula_dorso").files[0]),
           fileToBase64(document.getElementById("licencia_frente").files[0]),
           fileToBase64(document.getElementById("licencia_dorso").files[0]),
+          fileToBase64(document.getElementById("foto_asegurado_1").files[0]),
+          fileToBase64(document.getElementById("foto_asegurado_2").files[0]),
+          fileToBase64(document.getElementById("foto_tercero_1").files[0]),
+          fileToBase64(document.getElementById("foto_tercero_2").files[0]),
         ]);
 
       const g = id => document.getElementById(id)?.value?.trim() || "";
@@ -1878,6 +1923,9 @@ function clearErrors(step) {
         dia_siniestro:      g("dia_siniestro"),
         hora:               g("hora"),
         titular:            g("titular"),
+        titular_dni:        g("titular_dni"),
+        titular_domicilio:  g("titular_domicilio"),
+        titular_telefono:   g("titular_telefono"),
         vencimiento_licencia: g("vencimiento_licencia"),
         velocidad:          g("velocidad"),
         calle:              g("calle"),
@@ -1978,6 +2026,10 @@ function clearErrors(step) {
         cedula_dorso:       cedulaDorsoB64,
         licencia_frente:    licFrenteB64,
         licencia_dorso:     licDorsoB64,
+        foto_asegurado_1:   fotoAsegurado1B64,
+        foto_asegurado_2:   fotoAsegurado2B64,
+        foto_tercero_1:     fotoTercero1B64,
+        foto_tercero_2:     fotoTercero2B64,
       };
 
       const res = await fetch(WEBHOOK_URL, {
