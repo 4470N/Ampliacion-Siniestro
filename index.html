@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Declaración Jurada de Siniestro | Iezzi & Varone</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -485,6 +485,20 @@
       display: flex;
       align-items: center;
       gap: 4px;
+    }
+
+    /* ── iOS & Mobile Fixes ── */
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    * { -webkit-tap-highlight-color: transparent; }
+    button, .btn, label, .toggle-btn, .victim-tab { touch-action: manipulation; }
+    body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    select { background-color: var(--input-bg); }
+    @media (max-width: 480px) {
+      .footer, .footer p { font-size: 10px !important; line-height: 1.6 !important; }
+      .footer { padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px)); }
+      input[type=text], input[type=date], input[type=time], input[type=email],
+      input[type=tel], input[type=number], select, textarea { font-size: 16px !important; }
+      .btn, button { min-height: 44px; }
     }
 
   </style>
@@ -2040,9 +2054,10 @@ function clearErrors(step) {
 
       if (!res.ok) throw new Error("HTTP " + res.status);
 
-      document.querySelector(".container").innerHTML = "";
+      document.querySelector(".container").style.display = "none";
+      const hero = document.querySelector(".hero"); if (hero) hero.style.display = "none";
       document.getElementById("screenOk").style.display = "block";
-      document.querySelector(".container").appendChild(document.getElementById("screenOk"));
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
     } catch (err) {
       document.getElementById("screenError").style.display = "block";
