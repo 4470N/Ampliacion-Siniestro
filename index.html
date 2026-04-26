@@ -215,28 +215,6 @@
     .conditional.hidden { max-height: 0; opacity: 0; pointer-events: none; }
     .conditional.visible { max-height: 2400px; opacity: 1; }
 
-    /* ── VICTIM CARDS ── */
-    .victim-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    .victim-tab {
-      padding: 7px 16px;
-      border-radius: 20px;
-      border: 1.5px solid var(--border);
-      background: var(--input-bg);
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .victim-tab.active { background: var(--navy); color: white; border-color: var(--navy); }
-    .victim-panel { display: none; }
-    .victim-panel.active { display: block; animation: fadeIn 0.25s ease; }
-
     /* ── INFOLINE ── */
     .info-box {
       background: #f0f8fb;
@@ -450,9 +428,6 @@
     }
 
     @media (max-width: 480px) {
-      /* Víctimas tabs */
-      .victim-tabs { flex-wrap: wrap; gap: 6px; }
-      .victim-tab { font-size: 12px; padding: 7px 10px; }
       /* Aumentar max-height para contenido expandido en mobile */
       .conditional.visible { max-height: 3000px; }
     }
@@ -490,7 +465,7 @@
     /* ── iOS & Mobile Fixes ── */
     html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     * { -webkit-tap-highlight-color: transparent; }
-    button, .btn, label, .toggle-btn, .victim-tab { touch-action: manipulation; }
+    button, .btn, label, .toggle-btn { touch-action: manipulation; }
     body { padding-bottom: env(safe-area-inset-bottom, 0px); }
     select { background-color: var(--input-bg); }
     @media (max-width: 480px) {
@@ -1207,7 +1182,7 @@
 
 
   <!-- ══════════════════════════════════════════════
-       PASO 5 – TESTIGOS, PERSONAL MÉDICO Y VÍCTIMAS
+       PASO 5 – TESTIGOS Y PERSONAL MÉDICO
   ══════════════════════════════════════════════ -->
   <div class="section" id="sec-5">
 
@@ -1296,136 +1271,6 @@
           </div>
           <input type="hidden" id="personal_medico" value="">
         </div>
-      </div>
-    </div>
-
-    <!-- Víctimas -->
-    <div class="section-card">
-      <div class="section-title">🚑 Víctimas del Hecho</div>
-      <div class="section-body">
-        <div class="info-box">Podés cargar hasta <strong>4 víctimas</strong>. Completá solo las que correspondan.</div>
-
-        <div class="victim-tabs">
-          <div class="victim-tab active" onclick="showVictim(1)">Víctima 1</div>
-          <div class="victim-tab" onclick="showVictim(2)">Víctima 2</div>
-          <div class="victim-tab" onclick="showVictim(3)">Víctima 3</div>
-          <div class="victim-tab" onclick="showVictim(4)">Víctima 4</div>
-        </div>
-
-        <!-- Víctima 1 -->
-        <div class="victim-panel active" id="victim-1">
-          <div class="row-2">
-            <div class="field">
-              <label>Nombre y Apellido</label>
-              <input type="text" id="vic1_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
-            </div>
-            <div class="field">
-              <label>DNI</label>
-              <input type="text" id="vic1_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
-            </div>
-          </div>
-          <div class="row-2">
-            <div class="field">
-              <label>Teléfono</label>
-              <input type="tel" id="vic1_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
-            </div>
-            <div class="field">
-              <label>Rodado / Vehículo</label>
-              <input type="text" id="vic1_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20">
-            </div>
-          </div>
-          <div class="field">
-            <label>Dirección</label>
-            <input type="text" id="vic1_direccion" placeholder="Domicilio de la víctima" maxlength="40">
-          </div>
-          <div class="field">
-            <label>Lesiones</label>
-            <input type="text" id="vic1_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters">
-          </div>
-          <div class="row-3">
-            <div class="field">
-              <label>Cond. / 3° T.</label>
-              <select id="vic1_cond">
-                <option value="">Selec.</option>
-                <option>Conductor</option>
-                <option>3° Titular</option>
-                <option>Acompañante</option>
-                <option>Peatón</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Ocupación</label>
-              <input type="text" id="vic1_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters">
-            </div>
-            <div class="field">
-              <label>¿ART del 3°?</label>
-              <select id="vic1_art">
-                <option value="">Selec.</option>
-                <option>No</option>
-                <option>Sí</option>
-                <option>No sabe</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Víctima 2 -->
-        <div class="victim-panel" id="victim-2">
-          <div class="row-2">
-            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic2_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters"></div>
-            <div class="field"><label>DNI</label><input type="text" id="vic2_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers"></div>
-          </div>
-          <div class="row-2">
-            <div class="field"><label>Teléfono</label><input type="tel" id="vic2_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers"></div>
-            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic2_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20"></div>
-          </div>
-          <div class="field"><label>Dirección</label><input type="text" id="vic2_direccion" placeholder="Domicilio de la víctima" maxlength="40"></div>
-          <div class="field"><label>Lesiones</label><input type="text" id="vic2_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters"></div>
-          <div class="row-3">
-            <div class="field"><label>Cond. / 3° T.</label><select id="vic2_cond"><option value="">Selec.</option><option>Conductor</option><option>3° Titular</option><option>Acompañante</option><option>Peatón</option></select></div>
-            <div class="field"><label>Ocupación</label><input type="text" id="vic2_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters"></div>
-            <div class="field"><label>¿ART del 3°?</label><select id="vic2_art"><option value="">Selec.</option><option>No</option><option>Sí</option><option>No sabe</option></select></div>
-          </div>
-        </div>
-
-        <!-- Víctima 3 -->
-        <div class="victim-panel" id="victim-3">
-          <div class="row-2">
-            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic3_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters"></div>
-            <div class="field"><label>DNI</label><input type="text" id="vic3_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers"></div>
-          </div>
-          <div class="row-2">
-            <div class="field"><label>Teléfono</label><input type="tel" id="vic3_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers"></div>
-            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic3_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20"></div>
-          </div>
-          <div class="field"><label>Dirección</label><input type="text" id="vic3_direccion" placeholder="Domicilio de la víctima" maxlength="40"></div>
-          <div class="field"><label>Lesiones</label><input type="text" id="vic3_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters"></div>
-          <div class="row-3">
-            <div class="field"><label>Cond. / 3° T.</label><select id="vic3_cond"><option value="">Selec.</option><option>Conductor</option><option>3° Titular</option><option>Acompañante</option><option>Peatón</option></select></div>
-            <div class="field"><label>Ocupación</label><input type="text" id="vic3_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters"></div>
-            <div class="field"><label>¿ART del 3°?</label><select id="vic3_art"><option value="">Selec.</option><option>No</option><option>Sí</option><option>No sabe</option></select></div>
-          </div>
-        </div>
-
-        <!-- Víctima 4 -->
-        <div class="victim-panel" id="victim-4">
-          <div class="row-2">
-            <div class="field"><label>Nombre y Apellido</label><input type="text" id="vic4_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters"></div>
-            <div class="field"><label>DNI</label><input type="text" id="vic4_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers"></div>
-          </div>
-          <div class="row-2">
-            <div class="field"><label>Teléfono</label><input type="tel" id="vic4_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers"></div>
-            <div class="field"><label>Rodado / Vehículo</label><input type="text" id="vic4_rodado" placeholder="Ej: Moto, Auto, Bicicleta" maxlength="20"></div>
-          </div>
-          <div class="field"><label>Dirección</label><input type="text" id="vic4_direccion" placeholder="Domicilio de la víctima" maxlength="40"></div>
-          <div class="field"><label>Lesiones</label><input type="text" id="vic4_lesiones" placeholder="Descripción de lesiones" maxlength="25" data-filter="letters"></div>
-          <div class="row-3">
-            <div class="field"><label>Cond. / 3° T.</label><select id="vic4_cond"><option value="">Selec.</option><option>Conductor</option><option>3° Titular</option><option>Acompañante</option><option>Peatón</option></select></div>
-            <div class="field"><label>Ocupación</label><input type="text" id="vic4_ocupacion" placeholder="Ocupación" maxlength="20" data-filter="letters"></div>
-            <div class="field"><label>¿ART del 3°?</label><select id="vic4_art"><option value="">Selec.</option><option>No</option><option>Sí</option><option>No sabe</option></select></div>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -1784,16 +1629,6 @@ function clearErrors(step) {
     cond.className = "conditional " + (val === "si" ? "visible" : "hidden");
   }
 
-  // ── Victim tabs ──
-  function showVictim(n) {
-    document.querySelectorAll(".victim-tab").forEach((t, i) => {
-      t.classList.toggle("active", i + 1 === n);
-    });
-    document.querySelectorAll(".victim-panel").forEach((p, i) => {
-      p.classList.toggle("active", i + 1 === n);
-    });
-  }
-
   // ── Archivos ──
   function handleFile(input, dropId) {
     const drop = document.getElementById(dropId);
@@ -2011,23 +1846,6 @@ function clearErrors(step) {
         testigo3_cel:                 g("testigo3_cel"),
         testigo3_descripcion:         g("testigo3_descripcion"),
         personal_medico:    g("personal_medico"),
-        // Víctimas
-        vic1_nombre:        g("vic1_nombre"), vic1_dni: g("vic1_dni"), vic1_tel: g("vic1_tel"),
-        vic1_rodado:        g("vic1_rodado"), vic1_direccion: g("vic1_direccion"),
-        vic1_lesiones:      g("vic1_lesiones"), vic1_cond: gv("vic1_cond"),
-        vic1_ocupacion:     g("vic1_ocupacion"), vic1_art: gv("vic1_art"),
-        vic2_nombre:        g("vic2_nombre"), vic2_dni: g("vic2_dni"), vic2_tel: g("vic2_tel"),
-        vic2_rodado:        g("vic2_rodado"), vic2_direccion: g("vic2_direccion"),
-        vic2_lesiones:      g("vic2_lesiones"), vic2_cond: gv("vic2_cond"),
-        vic2_ocupacion:     g("vic2_ocupacion"), vic2_art: gv("vic2_art"),
-        vic3_nombre:        g("vic3_nombre"), vic3_dni: g("vic3_dni"), vic3_tel: g("vic3_tel"),
-        vic3_rodado:        g("vic3_rodado"), vic3_direccion: g("vic3_direccion"),
-        vic3_lesiones:      g("vic3_lesiones"), vic3_cond: gv("vic3_cond"),
-        vic3_ocupacion:     g("vic3_ocupacion"), vic3_art: gv("vic3_art"),
-        vic4_nombre:        g("vic4_nombre"), vic4_dni: g("vic4_dni"), vic4_tel: g("vic4_tel"),
-        vic4_rodado:        g("vic4_rodado"), vic4_direccion: g("vic4_direccion"),
-        vic4_lesiones:      g("vic4_lesiones"), vic4_cond: gv("vic4_cond"),
-        vic4_ocupacion:     g("vic4_ocupacion"), vic4_art: gv("vic4_art"),
         // PASO 6
         dni_declarante:     g("dni_declarante"),
         aclaracion:         g("aclaracion"),
