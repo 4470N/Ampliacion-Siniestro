@@ -610,23 +610,6 @@
             <input type="text" id="vinculo" placeholder="Ej: Titular, Familiar, Empleado" maxlength="10" data-filter="letters">
           </div>
         </div>
-        <div class="field">
-          <label>Aseguradora <span class="req">*</span></label>
-          <select id="aseguradora">
-           <option value="">Seleccionar compañía</option>
-           <option>Allianz</option>
-           <option>Federación Patronal</option>
-           <option>La Caja</option>
-           <option>Mapfre</option>
-           <option>Nación Seguros</option>
-           <option>Provincia Seguros S.A</option>
-           <option>Rivadavia</option>
-           <option>San Cristóbal</option>
-           <option>Sancor Seguros</option>
-           <option>Swiss Medical Seguros</option>
-           <option>Otro</option>
-          </select>
-        </div>
       </div>
     </div>
 
@@ -1574,7 +1557,7 @@ function clearErrors(step) {
 
   function validateStep(step) {
     const required = {
-      1: ["a_los_dias","conductor","dni","aseguradora"],
+      1: ["a_los_dias","conductor","dni"],
       2: ["dia_siniestro","descripcion_hecho"],
       3: [], 4: [], 5: [],
       6: ["dni_declarante","aclaracion"]
@@ -1779,7 +1762,6 @@ function clearErrors(step) {
         domicilio:          g("domicilio"),
         localidad:          g("localidad"),
         vinculo:            g("vinculo"),
-        aseguradora:        gv("aseguradora"),
         // Póliza y vehículo
         poliza_nro:         g("poliza_nro"),
         riesgo_cubierto:    g("riesgo_cubierto"),
