@@ -215,6 +215,44 @@
     .conditional.hidden { max-height: 0; opacity: 0; pointer-events: none; }
     .conditional.visible { max-height: 2400px; opacity: 1; }
 
+    /* ── TERCEROS DINÁMICOS ── */
+    .tercero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      margin-top: 4px;
+    }
+    .btn-agregar {
+      display: block;
+      width: 100%;
+      margin-top: 14px;
+      padding: 9px;
+      border: 1.5px dashed var(--celeste);
+      border-radius: 8px;
+      background: #f0f8fb;
+      color: var(--celeste);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .btn-agregar:hover { background: #e0f2fb; }
+    .btn-agregar:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-remove {
+      padding: 4px 10px;
+      border: 1.5px solid #e0b0b0;
+      border-radius: 6px;
+      background: #fff5f5;
+      color: #c0392b;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .toggle-btn.active-tipo { background: var(--navy); border-color: var(--navy); color: #fff; }
+
     /* ── INFOLINE ── */
     .info-box {
       background: #f0f8fb;
@@ -1053,26 +1091,31 @@
         </div>
         <div class="conditional hidden" id="cond_tercero_t">
           <div class="divider"></div>
-          <div class="row-2">
-            <div class="field">
-              <label>Nombre y Apellido</label>
-              <input type="text" id="tercero_t_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
-            </div>
-            <div class="field">
-              <label>DNI</label>
-              <input type="text" id="tercero_t_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+          <div id="terceros_t_list">
+            <div class="tercero-item" id="tercero_t_item_1">
+              <div class="row-2">
+                <div class="field">
+                  <label>Nombre y Apellido</label>
+                  <input type="text" id="tercero_t_1_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
+                </div>
+                <div class="field">
+                  <label>DNI</label>
+                  <input type="text" id="tercero_t_1_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+                </div>
+              </div>
+              <div class="row-2">
+                <div class="field">
+                  <label>Teléfono</label>
+                  <input type="tel" id="tercero_t_1_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
+                </div>
+                <div class="field">
+                  <label>Domicilio</label>
+                  <input type="text" id="tercero_t_1_domicilio" placeholder="Calle, número, localidad" maxlength="40">
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row-2">
-            <div class="field">
-              <label>Teléfono</label>
-              <input type="tel" id="tercero_t_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
-            </div>
-            <div class="field">
-              <label>Domicilio</label>
-              <input type="text" id="tercero_t_domicilio" placeholder="Calle, número, localidad" maxlength="40">
-            </div>
-          </div>
+          <button type="button" id="btn_agregar_t" class="btn-agregar" onclick="addTerceroT()">+ Agregar persona</button>
         </div>
       </div>
     </div>
@@ -1091,68 +1134,86 @@
         </div>
         <div class="conditional hidden" id="cond_tercero_nt">
           <div class="divider"></div>
-          <div class="row-2">
-            <div class="field">
-              <label>Nombre y Apellido</label>
-              <input type="text" id="tercero_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
-            </div>
-            <div class="field">
-              <label>DNI</label>
-              <input type="text" id="tercero_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+          <div id="terceros_nt_list">
+            <div class="tercero-item" id="tercero_nt_item_1">
+              <div class="field">
+                <label>Tipo</label>
+                <div class="toggle-group" id="tipo_nt_group_1" style="flex-wrap:wrap;">
+                  <button type="button" class="toggle-btn" id="tipo_nt_1_peaton"    onclick="selectTipoNT(1,'peaton')">Peatón</button>
+                  <button type="button" class="toggle-btn" id="tipo_nt_1_bicicleta" onclick="selectTipoNT(1,'bicicleta')">Bicicleta</button>
+                  <button type="button" class="toggle-btn" id="tipo_nt_1_moto"      onclick="selectTipoNT(1,'moto')">Moto</button>
+                  <button type="button" class="toggle-btn" id="tipo_nt_1_auto"      onclick="selectTipoNT(1,'auto')">Auto</button>
+                  <button type="button" class="toggle-btn" id="tipo_nt_1_patin"     onclick="selectTipoNT(1,'patin')">Patín Eléctrico</button>
+                </div>
+                <input type="hidden" id="tercero_nt_1_tipo" value="">
+              </div>
+              <div class="row-2">
+                <div class="field">
+                  <label>Nombre y Apellido</label>
+                  <input type="text" id="tercero_nt_1_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
+                </div>
+                <div class="field">
+                  <label>DNI</label>
+                  <input type="text" id="tercero_nt_1_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+                </div>
+              </div>
+              <div class="row-2">
+                <div class="field">
+                  <label>Teléfono</label>
+                  <input type="tel" id="tercero_nt_1_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
+                </div>
+                <div class="field">
+                  <label>Domicilio</label>
+                  <input type="text" id="tercero_nt_1_domicilio" placeholder="Calle, número, localidad" maxlength="40">
+                </div>
+              </div>
+              <div class="conditional hidden" id="tercero_nt_1_vehiculo">
+                <div class="divider"></div>
+                <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">Vehículo del Tercero</div>
+                <div class="row-3">
+                  <div class="field">
+                    <label>Marca</label>
+                    <input type="text" id="tercero_nt_1_marca" placeholder="Ej: Toyota" maxlength="20">
+                  </div>
+                  <div class="field">
+                    <label>Modelo</label>
+                    <input type="text" id="tercero_nt_1_modelo" placeholder="Ej: Corolla" maxlength="20">
+                  </div>
+                  <div class="field">
+                    <label>Año</label>
+                    <input type="text" id="tercero_nt_1_anio" placeholder="Ej: 2022" maxlength="4" inputmode="numeric">
+                  </div>
+                </div>
+                <div class="row-2">
+                  <div class="field">
+                    <label>Dominio / Patente</label>
+                    <input type="text" id="tercero_nt_1_dominio" placeholder="Ej: ABC-123" maxlength="10">
+                  </div>
+                  <div class="field">
+                    <label>Uso</label>
+                    <select id="tercero_nt_1_uso">
+                      <option value="">Seleccionar</option>
+                      <option>Particular</option>
+                      <option>Comercial</option>
+                      <option>Transporte de pasajeros</option>
+                      <option>Carga</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row-2">
+                  <div class="field">
+                    <label>N° de Motor</label>
+                    <input type="text" id="tercero_nt_1_motor" placeholder="Número de motor" maxlength="30">
+                  </div>
+                  <div class="field">
+                    <label>N° de Chasis</label>
+                    <input type="text" id="tercero_nt_1_chasis" placeholder="Número de chasis" maxlength="30">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row-2">
-            <div class="field">
-              <label>Teléfono</label>
-              <input type="tel" id="tercero_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
-            </div>
-            <div class="field">
-              <label>Domicilio</label>
-              <input type="text" id="tercero_domicilio" placeholder="Calle, número, localidad" maxlength="40">
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">Vehículo del Tercero</div>
-          <div class="row-3">
-            <div class="field">
-              <label>Marca</label>
-              <input type="text" id="tercero_vehiculo_marca" placeholder="Ej: Toyota" maxlength="20">
-            </div>
-            <div class="field">
-              <label>Modelo</label>
-              <input type="text" id="tercero_vehiculo_modelo" placeholder="Ej: Corolla" maxlength="20">
-            </div>
-            <div class="field">
-              <label>Año</label>
-              <input type="text" id="tercero_vehiculo_anio" placeholder="Ej: 2022" maxlength="4" inputmode="numeric">
-            </div>
-          </div>
-          <div class="row-2">
-            <div class="field">
-              <label>Dominio / Patente</label>
-              <input type="text" id="tercero_vehiculo_dominio" placeholder="Ej: ABC-123" maxlength="10">
-            </div>
-            <div class="field">
-              <label>Uso</label>
-              <select id="tercero_vehiculo_uso">
-                <option value="">Seleccionar</option>
-                <option>Particular</option>
-                <option>Comercial</option>
-                <option>Transporte de pasajeros</option>
-                <option>Carga</option>
-              </select>
-            </div>
-          </div>
-          <div class="row-2">
-            <div class="field">
-              <label>N° de Motor</label>
-              <input type="text" id="tercero_vehiculo_motor" placeholder="Número de motor" maxlength="30">
-            </div>
-            <div class="field">
-              <label>N° de Chasis</label>
-              <input type="text" id="tercero_vehiculo_chasis" placeholder="Número de chasis" maxlength="30">
-            </div>
-          </div>
+          <button type="button" id="btn_agregar_nt" class="btn-agregar" onclick="addTerceroNT()">+ Agregar persona</button>
         </div>
       </div>
     </div>
@@ -1633,6 +1694,167 @@ function clearErrors(step) {
     cond.className = "conditional " + (val === "si" ? "visible" : "hidden");
   }
 
+  // ── Terceros Transportados – dinámico ──
+  let _tTNextId = 2, _tTCount = 1;
+
+  function addTerceroT() {
+    if (_tTCount >= 4) return;
+    const i = _tTNextId++;
+    _tTCount++;
+    const list = document.getElementById("terceros_t_list");
+    const div = document.createElement("div");
+    div.className = "tercero-item";
+    div.id = `tercero_t_item_${i}`;
+    div.innerHTML = `
+      <div class="divider"></div>
+      <div class="tercero-header">
+        <span style="font-size:12px;font-weight:700;color:var(--navy);">Persona ${_tTCount}</span>
+        <button type="button" class="btn-remove" onclick="removeTerceroT(${i})">✕ Quitar</button>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Nombre y Apellido</label>
+          <input type="text" id="tercero_t_${i}_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
+        </div>
+        <div class="field">
+          <label>DNI</label>
+          <input type="text" id="tercero_t_${i}_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Teléfono</label>
+          <input type="tel" id="tercero_t_${i}_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
+        </div>
+        <div class="field">
+          <label>Domicilio</label>
+          <input type="text" id="tercero_t_${i}_domicilio" placeholder="Calle, número, localidad" maxlength="40">
+        </div>
+      </div>`;
+    list.appendChild(div);
+    applyFilters();
+    document.getElementById("btn_agregar_t").disabled = _tTCount >= 4;
+  }
+
+  function removeTerceroT(i) {
+    const el = document.getElementById(`tercero_t_item_${i}`);
+    if (el) { el.remove(); _tTCount--; }
+    document.getElementById("btn_agregar_t").disabled = false;
+  }
+
+  // ── Terceros No Transportados – dinámico ──
+  let _tNTNextId = 2, _tNTCount = 1;
+
+  function addTerceroNT() {
+    if (_tNTCount >= 4) return;
+    const i = _tNTNextId++;
+    _tNTCount++;
+    const list = document.getElementById("terceros_nt_list");
+    const div = document.createElement("div");
+    div.className = "tercero-item";
+    div.id = `tercero_nt_item_${i}`;
+    div.innerHTML = `
+      <div class="divider"></div>
+      <div class="tercero-header">
+        <span style="font-size:12px;font-weight:700;color:var(--navy);">Persona ${_tNTCount}</span>
+        <button type="button" class="btn-remove" onclick="removeTerceroNT(${i})">✕ Quitar</button>
+      </div>
+      <div class="field">
+        <label>Tipo</label>
+        <div class="toggle-group" id="tipo_nt_group_${i}" style="flex-wrap:wrap;">
+          <button type="button" class="toggle-btn" id="tipo_nt_${i}_peaton"    onclick="selectTipoNT(${i},'peaton')">Peatón</button>
+          <button type="button" class="toggle-btn" id="tipo_nt_${i}_bicicleta" onclick="selectTipoNT(${i},'bicicleta')">Bicicleta</button>
+          <button type="button" class="toggle-btn" id="tipo_nt_${i}_moto"      onclick="selectTipoNT(${i},'moto')">Moto</button>
+          <button type="button" class="toggle-btn" id="tipo_nt_${i}_auto"      onclick="selectTipoNT(${i},'auto')">Auto</button>
+          <button type="button" class="toggle-btn" id="tipo_nt_${i}_patin"     onclick="selectTipoNT(${i},'patin')">Patín Eléctrico</button>
+        </div>
+        <input type="hidden" id="tercero_nt_${i}_tipo" value="">
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Nombre y Apellido</label>
+          <input type="text" id="tercero_nt_${i}_nombre" placeholder="Apellido, Nombre" maxlength="30" data-filter="letters">
+        </div>
+        <div class="field">
+          <label>DNI</label>
+          <input type="text" id="tercero_nt_${i}_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Teléfono</label>
+          <input type="tel" id="tercero_nt_${i}_tel" placeholder="Número de contacto" maxlength="10" data-filter="numbers">
+        </div>
+        <div class="field">
+          <label>Domicilio</label>
+          <input type="text" id="tercero_nt_${i}_domicilio" placeholder="Calle, número, localidad" maxlength="40">
+        </div>
+      </div>
+      <div class="conditional hidden" id="tercero_nt_${i}_vehiculo">
+        <div class="divider"></div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">Vehículo del Tercero</div>
+        <div class="row-3">
+          <div class="field">
+            <label>Marca</label>
+            <input type="text" id="tercero_nt_${i}_marca" placeholder="Ej: Toyota" maxlength="20">
+          </div>
+          <div class="field">
+            <label>Modelo</label>
+            <input type="text" id="tercero_nt_${i}_modelo" placeholder="Ej: Corolla" maxlength="20">
+          </div>
+          <div class="field">
+            <label>Año</label>
+            <input type="text" id="tercero_nt_${i}_anio" placeholder="Ej: 2022" maxlength="4" inputmode="numeric">
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label>Dominio / Patente</label>
+            <input type="text" id="tercero_nt_${i}_dominio" placeholder="Ej: ABC-123" maxlength="10">
+          </div>
+          <div class="field">
+            <label>Uso</label>
+            <select id="tercero_nt_${i}_uso">
+              <option value="">Seleccionar</option>
+              <option>Particular</option>
+              <option>Comercial</option>
+              <option>Transporte de pasajeros</option>
+              <option>Carga</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label>N° de Motor</label>
+            <input type="text" id="tercero_nt_${i}_motor" placeholder="Número de motor" maxlength="30">
+          </div>
+          <div class="field">
+            <label>N° de Chasis</label>
+            <input type="text" id="tercero_nt_${i}_chasis" placeholder="Número de chasis" maxlength="30">
+          </div>
+        </div>
+      </div>`;
+    list.appendChild(div);
+    applyFilters();
+    document.getElementById("btn_agregar_nt").disabled = _tNTCount >= 4;
+  }
+
+  function removeTerceroNT(i) {
+    const el = document.getElementById(`tercero_nt_item_${i}`);
+    if (el) { el.remove(); _tNTCount--; }
+    document.getElementById("btn_agregar_nt").disabled = false;
+  }
+
+  function selectTipoNT(i, tipo) {
+    document.getElementById(`tercero_nt_${i}_tipo`).value = tipo;
+    ["peaton","bicicleta","moto","auto","patin"].forEach(t => {
+      const btn = document.getElementById(`tipo_nt_${i}_${t}`);
+      if (btn) btn.className = "toggle-btn" + (t === tipo ? " active-tipo" : "");
+    });
+    const vehiculo = document.getElementById(`tercero_nt_${i}_vehiculo`);
+    if (vehiculo) vehiculo.className = "conditional " + (tipo === "auto" || tipo === "moto" ? "visible" : "hidden");
+  }
+
   // ── Archivos ──
   function handleFile(input, dropId) {
     const drop = document.getElementById(dropId);
@@ -1747,6 +1969,38 @@ function clearErrors(step) {
       const g = id => document.getElementById(id)?.value?.trim() || "";
       const gv = id => document.getElementById(id)?.value || "";
 
+      // Recolectar terceros transportados del DOM
+      const _tT = [];
+      document.querySelectorAll("#terceros_t_list .tercero-item").forEach(item => {
+        const s = item.id.replace("tercero_t_item_", "");
+        _tT.push({
+          nombre:    (document.getElementById(`tercero_t_${s}_nombre`)?.value  || "").trim(),
+          dni:       (document.getElementById(`tercero_t_${s}_dni`)?.value     || "").trim(),
+          tel:       (document.getElementById(`tercero_t_${s}_tel`)?.value     || "").trim(),
+          domicilio: (document.getElementById(`tercero_t_${s}_domicilio`)?.value || "").trim(),
+        });
+      });
+
+      // Recolectar terceros no transportados del DOM
+      const _tNT = [];
+      document.querySelectorAll("#terceros_nt_list .tercero-item").forEach(item => {
+        const s = item.id.replace("tercero_nt_item_", "");
+        _tNT.push({
+          tipo:     (document.getElementById(`tercero_nt_${s}_tipo`)?.value     || "").trim(),
+          nombre:   (document.getElementById(`tercero_nt_${s}_nombre`)?.value   || "").trim(),
+          dni:      (document.getElementById(`tercero_nt_${s}_dni`)?.value      || "").trim(),
+          tel:      (document.getElementById(`tercero_nt_${s}_tel`)?.value      || "").trim(),
+          domicilio:(document.getElementById(`tercero_nt_${s}_domicilio`)?.value || "").trim(),
+          marca:    (document.getElementById(`tercero_nt_${s}_marca`)?.value    || "").trim(),
+          modelo:   (document.getElementById(`tercero_nt_${s}_modelo`)?.value   || "").trim(),
+          anio:     (document.getElementById(`tercero_nt_${s}_anio`)?.value     || "").trim(),
+          dominio:  (document.getElementById(`tercero_nt_${s}_dominio`)?.value  || "").trim(),
+          uso:      (document.getElementById(`tercero_nt_${s}_uso`)?.value      || "").trim(),
+          motor:    (document.getElementById(`tercero_nt_${s}_motor`)?.value    || "").trim(),
+          chasis:   (document.getElementById(`tercero_nt_${s}_chasis`)?.value   || "").trim(),
+        });
+      });
+
       const payload = {
         // PASO 1
         siniestro_nro:      NRO_SINIESTRO,
@@ -1820,24 +2074,21 @@ function clearErrors(step) {
         cubiertas:          gv("cubiertas"),
         accesorios:         g("accesorios"),
         // Terceros transportados
-        hubo_tercero_transportado:    g("hubo_tercero_transportado"),
-        tercero_t_nombre:             g("tercero_t_nombre"),
-        tercero_t_dni:                g("tercero_t_dni"),
-        tercero_t_tel:                g("tercero_t_tel"),
-        tercero_t_domicilio:          g("tercero_t_domicilio"),
+        hubo_tercero_transportado: g("hubo_tercero_transportado"),
+        tercero_t_1_nombre:    _tT[0]?.nombre    || "", tercero_t_1_dni:       _tT[0]?.dni       || "", tercero_t_1_tel:       _tT[0]?.tel       || "", tercero_t_1_domicilio: _tT[0]?.domicilio || "",
+        tercero_t_2_nombre:    _tT[1]?.nombre    || "", tercero_t_2_dni:       _tT[1]?.dni       || "", tercero_t_2_tel:       _tT[1]?.tel       || "", tercero_t_2_domicilio: _tT[1]?.domicilio || "",
+        tercero_t_3_nombre:    _tT[2]?.nombre    || "", tercero_t_3_dni:       _tT[2]?.dni       || "", tercero_t_3_tel:       _tT[2]?.tel       || "", tercero_t_3_domicilio: _tT[2]?.domicilio || "",
+        tercero_t_4_nombre:    _tT[3]?.nombre    || "", tercero_t_4_dni:       _tT[3]?.dni       || "", tercero_t_4_tel:       _tT[3]?.tel       || "", tercero_t_4_domicilio: _tT[3]?.domicilio || "",
         // Terceros no transportados
         hubo_tercero_no_transportado: g("hubo_tercero_no_transportado"),
-        tercero_nombre:               g("tercero_nombre"),
-        tercero_dni:                  g("tercero_dni"),
-        tercero_tel:                  g("tercero_tel"),
-        tercero_domicilio:            g("tercero_domicilio"),
-        tercero_vehiculo_marca:       g("tercero_vehiculo_marca"),
-        tercero_vehiculo_modelo:      g("tercero_vehiculo_modelo"),
-        tercero_vehiculo_anio:        g("tercero_vehiculo_anio"),
-        tercero_vehiculo_dominio:     g("tercero_vehiculo_dominio"),
-        tercero_vehiculo_uso:         gv("tercero_vehiculo_uso"),
-        tercero_vehiculo_motor:       g("tercero_vehiculo_motor"),
-        tercero_vehiculo_chasis:      g("tercero_vehiculo_chasis"),
+        tercero_nt_1_tipo: _tNT[0]?.tipo || "", tercero_nt_1_nombre: _tNT[0]?.nombre || "", tercero_nt_1_dni: _tNT[0]?.dni || "", tercero_nt_1_tel: _tNT[0]?.tel || "", tercero_nt_1_domicilio: _tNT[0]?.domicilio || "",
+        tercero_nt_1_marca: _tNT[0]?.marca || "", tercero_nt_1_modelo: _tNT[0]?.modelo || "", tercero_nt_1_anio: _tNT[0]?.anio || "", tercero_nt_1_dominio: _tNT[0]?.dominio || "", tercero_nt_1_uso: _tNT[0]?.uso || "", tercero_nt_1_motor: _tNT[0]?.motor || "", tercero_nt_1_chasis: _tNT[0]?.chasis || "",
+        tercero_nt_2_tipo: _tNT[1]?.tipo || "", tercero_nt_2_nombre: _tNT[1]?.nombre || "", tercero_nt_2_dni: _tNT[1]?.dni || "", tercero_nt_2_tel: _tNT[1]?.tel || "", tercero_nt_2_domicilio: _tNT[1]?.domicilio || "",
+        tercero_nt_2_marca: _tNT[1]?.marca || "", tercero_nt_2_modelo: _tNT[1]?.modelo || "", tercero_nt_2_anio: _tNT[1]?.anio || "", tercero_nt_2_dominio: _tNT[1]?.dominio || "", tercero_nt_2_uso: _tNT[1]?.uso || "", tercero_nt_2_motor: _tNT[1]?.motor || "", tercero_nt_2_chasis: _tNT[1]?.chasis || "",
+        tercero_nt_3_tipo: _tNT[2]?.tipo || "", tercero_nt_3_nombre: _tNT[2]?.nombre || "", tercero_nt_3_dni: _tNT[2]?.dni || "", tercero_nt_3_tel: _tNT[2]?.tel || "", tercero_nt_3_domicilio: _tNT[2]?.domicilio || "",
+        tercero_nt_3_marca: _tNT[2]?.marca || "", tercero_nt_3_modelo: _tNT[2]?.modelo || "", tercero_nt_3_anio: _tNT[2]?.anio || "", tercero_nt_3_dominio: _tNT[2]?.dominio || "", tercero_nt_3_uso: _tNT[2]?.uso || "", tercero_nt_3_motor: _tNT[2]?.motor || "", tercero_nt_3_chasis: _tNT[2]?.chasis || "",
+        tercero_nt_4_tipo: _tNT[3]?.tipo || "", tercero_nt_4_nombre: _tNT[3]?.nombre || "", tercero_nt_4_dni: _tNT[3]?.dni || "", tercero_nt_4_tel: _tNT[3]?.tel || "", tercero_nt_4_domicilio: _tNT[3]?.domicilio || "",
+        tercero_nt_4_marca: _tNT[3]?.marca || "", tercero_nt_4_modelo: _tNT[3]?.modelo || "", tercero_nt_4_anio: _tNT[3]?.anio || "", tercero_nt_4_dominio: _tNT[3]?.dominio || "", tercero_nt_4_uso: _tNT[3]?.uso || "", tercero_nt_4_motor: _tNT[3]?.motor || "", tercero_nt_4_chasis: _tNT[3]?.chasis || "",
         // PASO 5 – Testigos
         testigo1_nombre:              g("testigo1_nombre"),
         testigo1_dni:                 g("testigo1_dni"),
