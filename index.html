@@ -368,7 +368,8 @@
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
     /* ── SCREENS ── */
-    #screenOk, #screenError { display: none; }
+    #screenOk, #screenError, #msgEnviando { display: none; }
+    #msgEnviando { background:#f0f8ff; border-left:4px solid #4db8d4; border-radius:8px; padding:14px 16px; color:#1a3a6b; font-size:14px; text-align:center; line-height:1.6; margin-top:16px; }
     .screen-card {
       background: white;
       border-radius: 16px;
@@ -1481,6 +1482,7 @@
       <button class="btn btn-secondary" onclick="prevStep(6)">← Atrás</button>
       <button class="btn btn-submit" id="btnSubmit" onclick="enviarFormulario()">✅ Enviar Declaración Jurada</button>
     </div>
+    <div id="msgEnviando">⏳ Estamos enviando tu información. Esto puede tardar unos segundos.<br>Por favor, no cierres la pestaña hasta que veas el mensaje de confirmación.</div>
   </div>
 
 </div><!-- /container -->
@@ -1946,6 +1948,7 @@ function clearErrors(step) {
     const btn = document.getElementById("btnSubmit");
     btn.disabled    = true;
     btn.textContent = "⏳ Enviando declaración...";
+    document.getElementById("msgEnviando").style.display = "block";
 
     try {
       const [dniFrenteB64, dniDorsoB64, cedulaFrenteB64, cedulaDorsoB64, licFrenteB64, licDorsoB64,
@@ -2131,10 +2134,12 @@ function clearErrors(step) {
 
       document.querySelector(".container").style.display = "none";
       const hero = document.querySelector(".hero"); if (hero) hero.style.display = "none";
+      document.getElementById("msgEnviando").style.display = "none";
       document.getElementById("screenOk").style.display = "block";
       window.scrollTo({ top: 0, behavior: "smooth" });
 
     } catch (err) {
+      document.getElementById("msgEnviando").style.display = "none";
       document.getElementById("screenError").style.display = "block";
       btn.disabled    = false;
       btn.textContent = "✅ Enviar Declaración Jurada";
