@@ -1349,7 +1349,7 @@
         <div class="info-box">Adjuntá fotos nítidas de cada documento. Formatos aceptados: JPG, PNG.</div>
         <div class="file-grid">
           <div class="file-item">
-            <label>DNI – Frente</label>
+            <label>DNI Titular – Frente</label>
             <div class="file-drop" id="drop-dni-frente">
               <span class="icon">🪪</span>
               <div class="file-label">Tocá para subir</div>
@@ -1357,7 +1357,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>DNI – Dorso</label>
+            <label>DNI Titular – Dorso</label>
             <div class="file-drop" id="drop-dni-dorso">
               <span class="icon">🪪</span>
               <div class="file-label">Tocá para subir</div>
@@ -1420,21 +1420,38 @@
         </div>
         <div class="divider"></div>
         <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">📸 Fotos del Vehículo del Asegurado</div>
+        <div class="info-box" style="margin-bottom:12px;"><strong>Importante:</strong> tome las fotos del auto desde afuera, mostrando claramente los daños si los hay. Incluya todas las vistas indicadas.</div>
         <div class="file-grid">
           <div class="file-item">
-            <label>Foto del vehículo asegurado 1</label>
-            <div class="file-drop" id="drop-foto-asegurado-1">
-              <span class="icon">🚗</span>
-              <div class="file-label">Tocá para subir</div>
-              <input type="file" id="foto_asegurado_1" accept="image/*" onchange="handleFile(this,'drop-foto-asegurado-1')">
+            <label>Foto adelante</label>
+            <div class="file-drop" id="drop-foto-auto-adelante">
+              <span class="icon">⬆️</span>
+              <div class="file-label">Frente del auto</div>
+              <input type="file" id="foto_auto_adelante" accept="image/*" onchange="handleFile(this,'drop-foto-auto-adelante')">
             </div>
           </div>
           <div class="file-item">
-            <label>Foto del vehículo asegurado 2</label>
-            <div class="file-drop" id="drop-foto-asegurado-2">
-              <span class="icon">🚗</span>
-              <div class="file-label">Tocá para subir</div>
-              <input type="file" id="foto_asegurado_2" accept="image/*" onchange="handleFile(this,'drop-foto-asegurado-2')">
+            <label>Foto atrás</label>
+            <div class="file-drop" id="drop-foto-auto-atras">
+              <span class="icon">⬇️</span>
+              <div class="file-label">Parte trasera</div>
+              <input type="file" id="foto_auto_atras" accept="image/*" onchange="handleFile(this,'drop-foto-auto-atras')">
+            </div>
+          </div>
+          <div class="file-item">
+            <label>Lado izquierdo</label>
+            <div class="file-drop" id="drop-foto-auto-izquierdo">
+              <span class="icon">⬅️</span>
+              <div class="file-label">Lateral izquierdo</div>
+              <input type="file" id="foto_auto_izquierdo" accept="image/*" onchange="handleFile(this,'drop-foto-auto-izquierdo')">
+            </div>
+          </div>
+          <div class="file-item">
+            <label>Lado derecho</label>
+            <div class="file-drop" id="drop-foto-auto-derecho">
+              <span class="icon">➡️</span>
+              <div class="file-label">Lateral derecho</div>
+              <input type="file" id="foto_auto_derecho" accept="image/*" onchange="handleFile(this,'drop-foto-auto-derecho')">
             </div>
           </div>
         </div>
@@ -1981,7 +1998,8 @@ function clearErrors(step) {
 
     try {
       const [dniFrenteB64, dniDorsoB64, cedulaFrenteB64, cedulaDorsoB64, licFrenteB64, licDorsoB64,
-             fotoAsegurado1B64, fotoAsegurado2B64, fotoTercero1B64, fotoTercero2B64,
+             fotoAutoAdelanteB64, fotoAutoAtrasB64, fotoAutoIzquierdoB64, fotoAutoDerechoB64,
+             fotoTercero1B64, fotoTercero2B64,
              dniCondFrenteB64, dniCondDorsoB64] =
         await Promise.all([
           fileToBase64(document.getElementById("dni_frente").files[0]),
@@ -1990,8 +2008,10 @@ function clearErrors(step) {
           fileToBase64(document.getElementById("cedula_dorso").files[0]),
           fileToBase64(document.getElementById("licencia_frente").files[0]),
           fileToBase64(document.getElementById("licencia_dorso").files[0]),
-          fileToBase64(document.getElementById("foto_asegurado_1").files[0]),
-          fileToBase64(document.getElementById("foto_asegurado_2").files[0]),
+          fileToBase64(document.getElementById("foto_auto_adelante").files[0]),
+          fileToBase64(document.getElementById("foto_auto_atras").files[0]),
+          fileToBase64(document.getElementById("foto_auto_izquierdo").files[0]),
+          fileToBase64(document.getElementById("foto_auto_derecho").files[0]),
           fileToBase64(document.getElementById("foto_tercero_1").files[0]),
           fileToBase64(document.getElementById("foto_tercero_2").files[0]),
           fileToBase64(document.getElementById("dni_conductor_frente")?.files[0]),
@@ -2146,8 +2166,10 @@ function clearErrors(step) {
         cedula_dorso:       cedulaDorsoB64,
         licencia_frente:    licFrenteB64,
         licencia_dorso:     licDorsoB64,
-        foto_asegurado_1:       fotoAsegurado1B64,
-        foto_asegurado_2:       fotoAsegurado2B64,
+        foto_auto_adelante:     fotoAutoAdelanteB64,
+        foto_auto_atras:        fotoAutoAtrasB64,
+        foto_auto_izquierdo:    fotoAutoIzquierdoB64,
+        foto_auto_derecho:      fotoAutoDerechoB64,
         foto_tercero_1:         fotoTercero1B64,
         foto_tercero_2:         fotoTercero2B64,
         dni_conductor_frente:   dniCondFrenteB64,
