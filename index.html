@@ -580,7 +580,7 @@
   <div class="section active" id="sec-1">
 
     <div class="section-card">
-      <div class="section-title">Datos del Asegurado <span class="badge">PASO 1 / 6</span></div>
+      <div class="section-title">Datos del Titular / Asegurado <span class="badge">PASO 1 / 6</span></div>
       <div class="section-body">
         <div class="tipo-persona-wrap">
           <button type="button" id="btn-fisica" class="btn-tipo-persona active" onclick="seleccionarTipo('fisica')">👤 Persona Física</button>
@@ -659,26 +659,34 @@
       </div>
     </div>
 
-    <!-- Datos del Titular -->
-    <div class="section-card">
-      <div class="section-title">👤 Datos del Titular Registral</div>
-      <div class="section-body">
-        <div class="field">
-          <label>Titular del vehículo asegurado</label>
-          <input type="text" id="titular" placeholder="Nombre del titular de la póliza" maxlength="30" data-filter="letters">
+    <!-- Datos del Conductor (colapsable) -->
+    <div class="section-card" id="card-conductor">
+      <div class="section-title" onclick="toggleConductor()" style="cursor:pointer;user-select:none;display:flex;justify-content:space-between;align-items:center;">
+        <span>🧑 Datos del Conductor</span>
+        <span id="arrow-conductor">▼</span>
+      </div>
+      <div id="sec-conductor" style="display:none;">
+        <div style="padding:10px 20px 4px;font-size:13px;color:var(--muted);font-style:italic;">
+          Completar solo en caso de que el conductor sea distinto del asegurado
         </div>
-        <div class="row-3">
+        <div class="section-body">
           <div class="field">
-            <label>DNI del titular</label>
-            <input type="text" id="titular_dni" placeholder="Sin puntos" maxlength="8" data-filter="numbers">
+            <label>Nombre y Apellido</label>
+            <input type="text" id="conductor_nombre" placeholder="Apellido, Nombre" maxlength="40" data-filter="letters">
           </div>
           <div class="field">
-            <label>Domicilio del titular</label>
-            <input type="text" id="titular_domicilio" placeholder="Calle y número" maxlength="40">
+            <label>DNI</label>
+            <input type="text" id="conductor_dni" placeholder="Sin puntos" maxlength="13" data-filter="numbers">
           </div>
-          <div class="field">
-            <label>Teléfono del titular</label>
-            <input type="tel" id="titular_telefono" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
+          <div class="row-2">
+            <div class="field">
+              <label>Domicilio</label>
+              <input type="text" id="conductor_domicilio" placeholder="Calle y número" maxlength="40">
+            </div>
+            <div class="field">
+              <label>Teléfono</label>
+              <input type="tel" id="conductor_telefono" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
+            </div>
           </div>
         </div>
       </div>
@@ -1650,6 +1658,23 @@
     document.getElementById('field-edad').style.display       = esFisica ? '' : 'none';
     document.getElementById('row-nac-ecivil').style.display   = esFisica ? '' : 'none';
     document.getElementById('field-profesion').style.display  = esFisica ? '' : 'none';
+    // Jurídica: el conductor siempre es distinto → abrir card conductor
+    if (!esFisica) setConductorOpen(true);
+  }
+
+  function toggleConductor() {
+    const sec = document.getElementById('sec-conductor');
+    const arrow = document.getElementById('arrow-conductor');
+    const open = sec.style.display === 'none';
+    sec.style.display = open ? 'block' : 'none';
+    arrow.textContent = open ? '▲' : '▼';
+  }
+
+  function setConductorOpen(open) {
+    const sec = document.getElementById('sec-conductor');
+    const arrow = document.getElementById('arrow-conductor');
+    sec.style.display = open ? 'block' : 'none';
+    arrow.textContent = open ? '▲' : '▼';
   }
 
   // ── Validaciones ──
@@ -2095,10 +2120,10 @@ function clearErrors(step) {
         // PASO 2
         dia_siniestro:      g("dia_siniestro"),
         hora:               g("hora"),
-        titular:            g("titular"),
-        titular_dni:        g("titular_dni"),
-        titular_domicilio:  g("titular_domicilio"),
-        titular_telefono:   g("titular_telefono"),
+        conductor_nombre:   g("conductor_nombre"),
+        conductor_dni:      g("conductor_dni"),
+        conductor_domicilio:g("conductor_domicilio"),
+        conductor_telefono: g("conductor_telefono"),
         vencimiento_licencia: g("vencimiento_licencia"),
         velocidad:          g("velocidad"),
         calle:              g("calle"),
