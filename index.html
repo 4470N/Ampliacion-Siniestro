@@ -752,13 +752,17 @@
         </div>
         <div class="row-2">
           <div class="field">
-            <label>De la localidad de</label>
-            <input type="text" id="localidad_hecho" placeholder="Ciudad / Localidad del hecho" maxlength="20" data-filter="letters">
+            <label>Localidad del hecho</label>
+            <input type="text" id="localidad_hecho" placeholder="Ciudad / Localidad" maxlength="25" data-filter="letters">
           </div>
           <div class="field">
-            <label>Intersección / Altura</label>
-            <input type="text" id="interseccion" placeholder="Ej: Av. San Martín al 500" maxlength="15" data-filter="letters">
+            <label>Provincia</label>
+            <input type="text" id="provincia_hecho" placeholder="Provincia" maxlength="25" data-filter="letters">
           </div>
+        </div>
+        <div class="field">
+          <label>Intersección / Altura</label>
+          <input type="text" id="interseccion" placeholder="Ej: Av. San Martín al 500" maxlength="15" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
@@ -2102,6 +2106,7 @@ function clearErrors(step) {
         conductor_telefono: g("conductor_telefono"),
         calle:              g("calle"),
         localidad_hecho:    g("localidad_hecho"),
+        provincia_hecho:    g("provincia_hecho"),
         interseccion:       g("interseccion"),
         procedente:         g("procedente"),
         destino:            g("destino"),
