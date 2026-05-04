@@ -501,6 +501,11 @@
       background: #fff5f5 !important;
       box-shadow: 0 0 0 3px rgba(230,51,41,0.12);
     }
+    .field-error .file-drop {
+      border-color: var(--rojo) !important;
+      background: #fff5f5 !important;
+      box-shadow: 0 0 0 3px rgba(230,51,41,0.12);
+    }
     .field-error-msg {
       color: var(--rojo);
       font-size: 11px;
@@ -603,13 +608,13 @@
             <input type="text" id="dni" placeholder="Sin puntos" maxlength="13" data-filter="numbers">
           </div>
           <div class="field" id="field-edad">
-            <label>Edad</label>
+            <label>Edad <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
             <input type="text" id="edad" placeholder="Años" maxlength="2" inputmode="numeric" data-filter="numbers">
           </div>
         </div>
         <div class="row-2" id="row-nac-ecivil">
           <div class="field">
-            <label>Nacionalidad</label>
+            <label>Nacionalidad <span class="req">*</span></label>
             <select id="nacionalidad">
               <option value="">Seleccionar</option>
               <option>Argentino/a</option>
@@ -634,26 +639,26 @@
           </div>
         </div>
         <div class="field" id="field-profesion">
-          <label>Profesión / Ocupación</label>
+          <label>Profesión / Ocupación <span class="req">*</span></label>
           <input type="text" id="profesion" placeholder="Ej: Empleado, Comerciante, etc." maxlength="20" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
-            <label>Celular</label>
+            <label>Celular <span class="req">*</span></label>
             <input type="tel" id="celular" placeholder="11 XXXX-XXXX" maxlength="10" data-filter="numbers">
           </div>
           <div class="field">
-            <label>Correo electrónico</label>
+            <label>Correo electrónico <span class="req">*</span></label>
             <input type="email" id="correo" placeholder="correo@ejemplo.com" maxlength="32">
           </div>
         </div>
         <div class="row-2">
           <div class="field">
-            <label>Domicilio</label>
+            <label>Domicilio <span class="req">*</span></label>
             <input type="text" id="domicilio" placeholder="Calle y número" maxlength="40">
           </div>
           <div class="field">
-            <label>Localidad</label>
+            <label>Localidad <span class="req">*</span></label>
             <input type="text" id="localidad" placeholder="Ciudad / Localidad" maxlength="20" data-filter="letters">
           </div>
         </div>
@@ -703,25 +708,25 @@
       <div class="section-title">🚗 Datos del Vehículo Asegurado</div>
       <div class="section-body">
         <div class="field">
-          <label>Patente / Dominio</label>
+          <label>Patente / Dominio <span class="req">*</span></label>
           <input type="text" id="dominio" placeholder="ABC123" style="text-transform:uppercase" maxlength="7">
         </div>
         <div class="row-3">
           <div class="field">
-            <label>Marca</label>
+            <label>Marca <span class="req">*</span></label>
             <input type="text" id="marca_unidad" placeholder="Ej: Toyota" maxlength="18" data-filter="letters">
           </div>
           <div class="field">
-            <label>Modelo</label>
+            <label>Modelo <span class="req">*</span></label>
             <input type="text" id="modelo_unidad" placeholder="Ej: Corolla" maxlength="15">
           </div>
           <div class="field">
-            <label>Año</label>
+            <label>Año <span class="req">*</span></label>
             <input type="text" id="anio_unidad" placeholder="2020" maxlength="4" inputmode="numeric" data-filter="numbers">
           </div>
         </div>
         <div class="field">
-          <label>Color del vehículo</label>
+          <label>Color del vehículo <span class="req">*</span></label>
           <input type="text" id="color_vehiculo" placeholder="Ej: Blanco, Gris, Rojo..." maxlength="10" data-filter="letters">
         </div>
       </div>
@@ -747,40 +752,40 @@
             <input type="date" id="dia_siniestro">
           </div>
           <div class="field">
-            <label>Hora aproximada</label>
+            <label>Hora aproximada <span class="req">*</span></label>
             <input type="time" id="hora">
           </div>
         </div>
         <div class="field">
-          <label>Calle / Ruta donde ocurrió el hecho</label>
+          <label>Calle / Ruta donde ocurrió el hecho <span class="req">*</span></label>
           <input type="text" id="calle" placeholder="Nombre de la calle, ruta o autopista" maxlength="25" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
-            <label>Localidad del hecho</label>
+            <label>Localidad del hecho <span class="req">*</span></label>
             <input type="text" id="localidad_hecho" placeholder="Ciudad / Localidad" maxlength="25" data-filter="letters">
           </div>
           <div class="field">
-            <label>Provincia</label>
+            <label>Provincia <span class="req">*</span></label>
             <input type="text" id="provincia_hecho" placeholder="Provincia" maxlength="25" data-filter="letters">
           </div>
         </div>
         <div class="field">
-          <label>Intersección / Altura</label>
+          <label>Intersección / Altura <span class="req">*</span></label>
           <input type="text" id="interseccion" placeholder="Ej: Av. San Martín al 500" maxlength="15" data-filter="letters">
         </div>
         <div class="row-2">
           <div class="field">
-            <label>Procedente de</label>
+            <label>Procedente de <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
             <input type="text" id="procedente" placeholder="Lugar de origen" maxlength="25" data-filter="letters">
           </div>
           <div class="field">
-            <label>Con destino a</label>
+            <label>Con destino a <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
             <input type="text" id="destino" placeholder="Destino" maxlength="25" data-filter="letters">
           </div>
         </div>
         <div class="field">
-          <label>Mano de circulación</label>
+          <label>Mano de circulación <span class="req">*</span></label>
           <select id="mano_circulacion">
             <option value="">Seleccionar</option>
             <option>Mano unica</option>
@@ -811,7 +816,7 @@
       <div class="section-body">
         <div class="row-2">
           <div class="field">
-            <label>Descripción del lugar</label>
+            <label>Descripción del lugar <span class="req">*</span></label>
             <select id="desc_lugar">
               <option value="">Seleccionar</option>
               <option>Urbana</option>
@@ -822,7 +827,7 @@
             </select>
           </div>
           <div class="field">
-            <label>Estado del tránsito</label>
+            <label>Estado del tránsito <span class="req">*</span></label>
             <select id="transito">
               <option value="">Seleccionar</option>
               <option>Intenso</option>
@@ -833,7 +838,7 @@
         </div>
         <div class="row-2">
           <div class="field">
-            <label>Estado del pavimento</label>
+            <label>Estado del pavimento <span class="req">*</span></label>
             <select id="pavimento">
               <option value="">Seleccionar</option>
               <option>Bueno</option>
@@ -842,7 +847,7 @@
             </select>
           </div>
           <div class="field">
-            <label>Iluminación</label>
+            <label>Iluminación <span class="req">*</span></label>
             <select id="iluminacion">
               <option value="">Seleccionar</option>
               <option>Buena</option>
@@ -851,7 +856,7 @@
           </div>
         </div>
         <div class="field">
-          <label>Visibilidad</label>
+          <label>Visibilidad <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
           <select id="visibilidad">
             <option value="">Seleccionar</option>
             <option>Buena</option>
@@ -860,7 +865,7 @@
           </select>
         </div>
         <div class="field">
-          <label>Otras características del lugar</label>
+          <label>Otras características del lugar <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
           <input type="text" id="otras_caract" placeholder="Ej: cruce de vías, semáforo, señalización..." maxlength="30" data-filter="letters">
         </div>
       </div>
@@ -971,7 +976,7 @@
       <div class="section-body">
         <div class="row-2">
           <div class="field">
-            <label>Uso de la unidad</label>
+            <label>Uso de la unidad <span class="req">*</span></label>
             <select id="uso_unidad">
               <option value="Particular">Particular</option>
               <option value="Comercial">Comercial</option>
@@ -1014,7 +1019,7 @@
         </div>
         <div class="row-2">
           <div class="field">
-            <label>Estado de carrocería</label>
+            <label>Estado de carrocería <span class="req">*</span></label>
             <select id="estado_carroceria">
               <option value="Buena">Buena</option>
               <option value="Regular">Regular</option>
@@ -1222,7 +1227,7 @@
       <div class="section-body">
 
         <div style="margin-bottom:16px">
-          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">TESTIGO 1</div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">TESTIGO 1 <span style="font-weight:400;color:var(--muted)">(opcional)</span></div>
           <div class="row-3">
             <div class="field">
               <label>Nombre y Apellido</label>
@@ -1323,7 +1328,7 @@
         <div class="info-box">Adjuntá fotos nítidas de cada documento. Formatos aceptados: JPG, PNG.</div>
         <div class="file-grid">
           <div class="file-item">
-            <label>DNI Titular – Frente</label>
+            <label>DNI Titular – Frente <span class="req">*</span></label>
             <div class="file-drop" id="drop-dni-frente">
               <span class="icon">🪪</span>
               <div class="file-label">Tocá para subir</div>
@@ -1331,7 +1336,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>DNI Titular – Dorso</label>
+            <label>DNI Titular – Dorso <span class="req">*</span></label>
             <div class="file-drop" id="drop-dni-dorso">
               <span class="icon">🪪</span>
               <div class="file-label">Tocá para subir</div>
@@ -1339,7 +1344,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Cédula o Título – Frente</label>
+            <label>Cédula o Título – Frente <span class="req">*</span></label>
             <div class="file-drop" id="drop-cedula-frente">
               <span class="icon">📄</span>
               <div class="file-label">Tocá para subir</div>
@@ -1347,7 +1352,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Cédula o Título – Dorso</label>
+            <label>Cédula o Título – Dorso <span class="req">*</span></label>
             <div class="file-drop" id="drop-cedula-dorso">
               <span class="icon">📄</span>
               <div class="file-label">Tocá para subir</div>
@@ -1355,7 +1360,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Licencia – Frente</label>
+            <label>Licencia – Frente <span class="req">*</span></label>
             <div class="file-drop" id="drop-lic-frente">
               <span class="icon">🚗</span>
               <div class="file-label">Tocá para subir</div>
@@ -1363,7 +1368,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Licencia – Dorso</label>
+            <label>Licencia – Dorso <span class="req">*</span></label>
             <div class="file-drop" id="drop-lic-dorso">
               <span class="icon">🚗</span>
               <div class="file-label">Tocá para subir</div>
@@ -1397,7 +1402,7 @@
         <div class="info-box" style="margin-bottom:12px;"><strong>Importante:</strong> tome las fotos del auto desde afuera, mostrando claramente los daños si los hay. Incluya todas las vistas indicadas.</div>
         <div class="file-grid">
           <div class="file-item">
-            <label>Foto adelante</label>
+            <label>Foto adelante <span class="req">*</span></label>
             <div class="file-drop" id="drop-foto-auto-adelante">
               <span class="icon">⬆️</span>
               <div class="file-label">Frente del auto</div>
@@ -1405,7 +1410,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Foto atrás</label>
+            <label>Foto atrás <span class="req">*</span></label>
             <div class="file-drop" id="drop-foto-auto-atras">
               <span class="icon">⬇️</span>
               <div class="file-label">Parte trasera</div>
@@ -1413,7 +1418,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Lado izquierdo</label>
+            <label>Lado izquierdo <span class="req">*</span></label>
             <div class="file-drop" id="drop-foto-auto-izquierdo">
               <span class="icon">⬅️</span>
               <div class="file-label">Lateral izquierdo</div>
@@ -1421,7 +1426,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Lado derecho</label>
+            <label>Lado derecho <span class="req">*</span></label>
             <div class="file-drop" id="drop-foto-auto-derecho">
               <span class="icon">➡️</span>
               <div class="file-label">Lateral derecho</div>
@@ -1433,7 +1438,7 @@
         <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:0.3px;">📸 Fotos del Vehículo del Tercero</div>
         <div class="file-grid">
           <div class="file-item">
-            <label>Foto del vehículo del tercero 1</label>
+            <label>Foto del vehículo del tercero 1 <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
             <div class="file-drop" id="drop-foto-tercero-1">
               <span class="icon">🚙</span>
               <div class="file-label">Tocá para subir</div>
@@ -1441,7 +1446,7 @@
             </div>
           </div>
           <div class="file-item">
-            <label>Foto del vehículo del tercero 2</label>
+            <label>Foto del vehículo del tercero 2 <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
             <div class="file-drop" id="drop-foto-tercero-2">
               <span class="icon">🚙</span>
               <div class="file-label">Tocá para subir</div>
@@ -1492,7 +1497,7 @@
           </div>
         </div>
         <div class="field" style="margin-top:4px">
-          <label>Firma del declarante</label>
+          <label>Firma del declarante <span class="req">*</span></label>
           <div class="canvas-wrapper" id="wrapper">
             <canvas id="canvas"></canvas>
             <div class="canvas-hint" id="hint">✍️ Dibujá tu firma aquí</div>
@@ -1685,10 +1690,30 @@ function clearErrors(step) {
 
   function validateStep(step) {
     const required = {
-      1: ["a_los_dias","conductor","dni"],
-      2: ["dia_siniestro","descripcion_hecho"],
-      3: [], 4: [], 5: [],
+      1: ["a_los_dias","conductor","dni",
+          "nacionalidad","profesion","celular","correo","domicilio","localidad",
+          "dominio","marca_unidad","modelo_unidad","anio_unidad","color_vehiculo"],
+      2: ["dia_siniestro","descripcion_hecho",
+          "hora","calle","localidad_hecho","provincia_hecho","interseccion","mano_circulacion"],
+      3: ["desc_lugar","transito","pavimento","iluminacion"],
+      4: ["uso_unidad","estado_carroceria"],
+      5: [],
       6: ["dni_declarante","aclaracion"]
+    };
+
+    // Toggles SI/NO requeridos por paso (hidden inputs que deben tener valor no vacío)
+    const requiredToggles = {
+      3: ["actuaciones_penales","alcoholemia","ingirio","intervencion_policial","intervencion_hospitalaria","causa_penal","vehiculo_reparado"],
+      4: ["hubo_tercero_transportado","hubo_tercero_no_transportado"],
+      5: ["personal_medico"],
+      6: []
+    };
+
+    // Archivos requeridos en paso 6
+    const requiredFiles = {
+      6: ["dni_frente","dni_dorso","cedula_frente","cedula_dorso",
+          "licencia_frente","licencia_dorso",
+          "foto_auto_adelante","foto_auto_atras","foto_auto_izquierdo","foto_auto_derecho"]
     };
 
     clearErrors(step);
@@ -1696,6 +1721,7 @@ function clearErrors(step) {
     let firstInvalid = null;
     let hasErrors = false;
 
+    // Validar campos de texto/select/textarea
     for (const id of (required[step] || [])) {
       const el = document.getElementById(id);
       if (!el || !el.value.trim()) {
@@ -1712,8 +1738,52 @@ function clearErrors(step) {
       }
     }
 
+    // Validar toggles SI/NO
+    for (const id of (requiredToggles[step] || [])) {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) {
+        markError(el);
+        if (!firstInvalid) firstInvalid = el;
+        hasErrors = true;
+      } else {
+        const field = el.closest(".field");
+        if (field) {
+          field.classList.remove("field-error");
+          const msg = field.querySelector(".field-error-msg");
+          if (msg) msg.remove();
+        }
+      }
+    }
+
+    // Validar archivos requeridos
+    for (const id of (requiredFiles[step] || [])) {
+      const el = document.getElementById(id);
+      const field = el ? el.closest(".file-item") || el.closest(".field") : null;
+      if (!el || !el.files || !el.files[0]) {
+        if (field) {
+          field.classList.add("field-error");
+          if (!field.querySelector(".field-error-msg")) {
+            const msg = document.createElement("div");
+            msg.className = "field-error-msg";
+            msg.innerHTML = "⚠ Este archivo es obligatorio";
+            field.appendChild(msg);
+          }
+        }
+        if (!firstInvalid) firstInvalid = el || field;
+        hasErrors = true;
+      } else {
+        if (field) {
+          field.classList.remove("field-error");
+          const msg = field.querySelector(".field-error-msg");
+          if (msg) msg.remove();
+        }
+      }
+    }
+
     if (hasErrors) {
-      firstInvalid?.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (firstInvalid && firstInvalid.scrollIntoView) {
+        firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
       return false;
     }
     return true;
