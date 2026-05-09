@@ -2149,10 +2149,13 @@ function clearErrors(step) {
   }
 
   // ── Envío ──
+  let enviando = false;
   async function enviarFormulario() {
+    if (enviando) return;
     if (!validateStep(6)) return;
     if (!firmado) { alert("Por favor dibuje su firma antes de enviar."); return; }
 
+    enviando = true;
     const btn = document.getElementById("btnSubmit");
     btn.disabled    = true;
     btn.textContent = "⏳ Enviando declaración...";
@@ -2368,8 +2371,6 @@ function clearErrors(step) {
     } catch (err) {
       document.getElementById("modalProgress").style.display = "none";
       document.getElementById("modalError").style.display = "block";
-      btn.disabled    = false;
-      btn.textContent = "✅ Enviar Declaración Jurada";
     }
   }
 
@@ -2377,6 +2378,12 @@ function clearErrors(step) {
     document.getElementById("modalEnviando").classList.remove("activo");
     document.getElementById("modalError").style.display = "none";
     document.getElementById("modalProgress").style.display = "block";
+    enviando = false;
+    const btn = document.getElementById("btnSubmit");
+    if (btn) {
+      btn.disabled    = false;
+      btn.textContent = "✅ Enviar Declaración Jurada";
+    }
   }
 </script>
 
